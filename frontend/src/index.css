@@ -1,0 +1,91 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@300,400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 60 9% 98%;
+        --foreground: 270 16% 11%;
+        --card: 0 0% 100%;
+        --card-foreground: 270 16% 11%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 270 16% 11%;
+        --primary: 345 98% 26%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 48 11% 94%;
+        --secondary-foreground: 270 16% 11%;
+        --muted: 48 11% 94%;
+        --muted-foreground: 264 5% 41%;
+        --accent: 166 100% 19%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 48 8% 86%;
+        --input: 48 8% 86%;
+        --ring: 345 98% 26%;
+        --radius: 0.75rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-family: "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection {
+        background-color: #850122;
+        color: #ffffff;
+    }
+}
+
+@layer utilities {
+    .font-display {
+        font-family: "Cabinet Grotesk", "Satoshi", sans-serif;
+    }
+    .text-ink {
+        color: #1b1526;
+    }
+    .text-ink-muted {
+        color: #6b6575;
+    }
+    .bg-paper {
+        background-color: #fdfdfa;
+    }
+    .bg-paper-warm {
+        background-color: #f4f3ee;
+    }
+    .bg-brand {
+        background-color: #850122;
+    }
+    .text-brand {
+        color: #850122;
+    }
+    .bg-pine {
+        background-color: #015f47;
+    }
+    .text-pine {
+        color: #015f47;
+    }
+    .bg-night {
+        background-color: #16111f;
+    }
+    .border-paper-dark {
+        border-color: #e6e4dc;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}

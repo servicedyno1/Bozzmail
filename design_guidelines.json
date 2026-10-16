@@ -1,0 +1,176 @@
+{
+  "build_manifest": {
+    "direction": {
+      "app_type": "landing_page",
+      "ambition": "A3 EXPRESSIVE",
+      "mode": "dark",
+      "rail": "waitlist",
+      "spine": [
+        "Header Navigation",
+        "Hero Section (Headline, Subhead, Waitlist Form, Toggles illustration)",
+        "Tabbed Product Showcase (Mail & Calendar toggles with Mockup Image)",
+        "Values Section (Secure, Green, Ad-free with placeholders for testimonials)",
+        "Mission Story Band (Sustainability, Revolution, Team)",
+        "Feature Grid (Post-quantum Security, Privacy, Open Source)",
+        "Audience Cards (Business, Medical, Personal, Journalists)",
+        "Bottom CTA Band (Forever free, Waitlist Form)",
+        "Comprehensive Footer"
+      ],
+      "name": "Enclave",
+      "tone": "Premium, High-Contrast, Swiss Minimalist, Privacy-Focused",
+      "axes": []
+    },
+    "tone_tokens": {
+      "typography": {
+        "heading_family": "Cabinet Grotesk",
+        "body_family": "Satoshi",
+        "scale": {
+          "hero_title": "text-5xl sm:text-6xl md:text-7xl tracking-tighter leading-tight",
+          "h2": "text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight",
+          "h3": "text-2xl md:text-3xl font-bold tracking-tight",
+          "h4": "text-lg md:text-xl font-medium",
+          "body": "text-base md:text-lg leading-relaxed text-slate-300",
+          "small": "text-sm text-slate-400"
+        },
+        "weights": {
+          "light": "font-light",
+          "regular": "font-normal",
+          "medium": "font-medium",
+          "bold": "font-bold",
+          "black": "font-black"
+        }
+      },
+      "colors": {
+        "background": "#0B1120",
+        "foreground": "#FFFFFF",
+        "card": "#151F32",
+        "card_foreground": "#F8FAFC",
+        "primary": "#10B981",
+        "primary_foreground": "#000000",
+        "muted": "#1E293B",
+        "muted_foreground": "#94A3B8",
+        "border": "#334155",
+        "accent": "#0F172A",
+        "accent_foreground": "#F1F5F9"
+      },
+      "spacing": {
+        "section_py": "py-24 md:py-32",
+        "container_px": "px-6 md:px-12 lg:max-w-7xl lg:mx-auto",
+        "gap_large": "gap-12 md:gap-20",
+        "gap_medium": "gap-8 md:gap-12"
+      },
+      "radius": "rounded-2xl"
+    },
+    "conversion_wiring": {
+      "primary_action": "waitlist",
+      "action_locations": ["hero", "bottom_cta_band"],
+      "action_behavior": "Email capture form. Needs to POST to FastAPI `/api/waitlist` endpoint and save to MongoDB. Include loading state and success toast using Sonner.",
+      "controls": {
+        "email_input": "Shadcn UI Input component, type email, required",
+        "submit_button": "Shadcn UI Button component, pill-shaped, primary color"
+      }
+    },
+    "content_slots": [
+      { "slot": "nav_brand", "text": "Enclave", "source": "brief" },
+      { "slot": "hero_headline_light", "text": "Turn ON ", "source": "brief" },
+      { "slot": "hero_headline_bold", "text": "Privacy.", "source": "brief" },
+      { "slot": "hero_subheadline", "text": "Take back your data with Enclave's encrypted email, calendar and contacts.", "source": "brief" },
+      { "slot": "showcase_tab_1", "text": "Enclave Mail", "source": "brief" },
+      { "slot": "showcase_tab_2", "text": "Enclave Calendar", "source": "brief" },
+      { "slot": "values_title_light", "text": "A better ", "source": "brief" },
+      { "slot": "values_title_bold", "text": "web.", "source": "brief" },
+      { "slot": "value_1_title", "text": "Secure", "source": "brief" },
+      { "slot": "value_2_title", "text": "Green", "source": "brief" },
+      { "slot": "value_3_title", "text": "Ad-free", "source": "brief" },
+      { "slot": "testimonial_placeholder_1", "text": "[Placeholder Testimonial about Security]", "source": "placeholder" },
+      { "slot": "testimonial_placeholder_2", "text": "[Placeholder Testimonial about Clean Energy]", "source": "placeholder" },
+      { "slot": "feature_grid_title", "text": "Welcome to post-quantum security", "source": "brief" },
+      { "slot": "audience_title", "text": "For all your email needs", "source": "brief" },
+      { "slot": "audience_business", "text": "Business", "source": "brief" },
+      { "slot": "audience_medical", "text": "Medical", "source": "brief" },
+      { "slot": "audience_personal", "text": "Personal", "source": "brief" },
+      { "slot": "audience_activists", "text": "Activists", "source": "brief" },
+      { "slot": "audience_journalists", "text": "Journalists", "source": "brief" },
+      { "slot": "cta_title", "text": "Forever free.", "source": "brief" },
+      { "slot": "cta_sub", "text": "Privacy is a fundamental right. Secure your spot on the waitlist.", "source": "brief" }
+    ],
+    "fabrication_guardrails": [
+      "DO NOT add fake statistics, user counts, or uptime metrics.",
+      "DO NOT add fake reviews, names, or app store ratings.",
+      "DO NOT invent awards or press mentions (e.g., 'Featured in TechCrunch').",
+      "DO NOT add non-existent client logos."
+    ],
+    "locale": {
+      "language": "en-US"
+    },
+    "image_urls": [
+      {
+        "url": "https://images.unsplash.com/photo-1627542557169-5ed71c66ed85?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwZW1haWwlMjBpbnRlcmZhY2UlMjBhcHAlMjBtb2NrdXB8ZW58MHx8fHwxNzkyMTgyODY0fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Minimalist phone mockup representing the encrypted Mail app interface.",
+        "category": "product_showcase_mail"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1641567374010-07f12d41da86?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwzfHxjYWxlbmRhciUyMGFwcCUyMGludGVyZmFjZSUyMG1vY2t1cHxlbnwwfHx8fDE3OTIxODI4NjV8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Dark theme calendar interface on a mobile device.",
+        "category": "product_showcase_calendar"
+      },
+      {
+        "url": "https://images.pexels.com/photos/7580707/pexels-photo-7580707.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Business professional sitting at desk.",
+        "category": "audience_business"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1579154204601-01588f351e67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwzfHxtZWRpY2FsJTIwcHJvZmVzc2lvbmFsJTIwZG9jdG9yJTIwbGFib3JhdG9yeXxlbnwwfHx8fDE3OTIxODI4NzF8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Medical professional in lab environment.",
+        "category": "audience_medical"
+      },
+      {
+        "url": "https://images.pexels.com/photos/1467564/pexels-photo-1467564.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Person sitting comfortably at home using a laptop.",
+        "category": "audience_personal"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1596801129861-8592c97db6ad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwxfHxqb3VybmFsaXN0JTIwcmVwb3J0ZXIlMjB3b3JraW5nJTIwY2FtZXJhfGVufDB8fHx8MTc5MjE4Mjg3MXww&ixlib=rb-4.1.0&q=85",
+        "description": "Journalist reporter working with a camera.",
+        "category": "audience_journalists"
+      },
+      {
+        "url": "https://images.pexels.com/photos/37730212/pexels-photo-37730212.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Modern green data center and server racks.",
+        "category": "mission_sustainability"
+      }
+    ],
+    "instructions_to_main_agent": "Implement a pixel-perfect, high-craft SaaS landing page inspired by the premium quality of Awwwards-tier sites. Follow the provided typography (Cabinet Grotesk / Satoshi) precisely. Ensure generous spacing, optical alignment, and subtle scroll-triggered reveal animations. Use Framer Motion for Tab transitions (Mail/Calendar) and the staggered entrance of Audience cards. The Waitlist form must be fully wired up using FastAPI and MongoDB to store emails. All user-facing buttons and inputs must have standard hover/focus states and `data-testid` attributes. NO transparent backgrounds on sticky headers. USE honest placeholders only where explicitly requested; DO NOT fabricate social proof."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Prioritize depth through layered design elements with z-index hierarchy.",
+    "Use generous padding, typically 2-3x standard (e.g., py-24, py-32) to let content breathe.",
+    "Never center align the entire app container.",
+    "Implement focus states with higher contrast.",
+    "Ensure `data-testid` attributes on all interactive elements (e.g., `data-testid=\"waitlist-submit-button\"`).",
+    "Use `sonner` for toast notifications upon form submission.",
+    "Strictly follow the color palette provided in tone_tokens without introducing arbitrary new colors.",
+    "Add transitions specifically for transform/opacity, avoiding `transition: all`."
+  ],
+  "accessibility": {
+    "contrast_requirements": "Ensure text over images or dark backgrounds has a minimum 4.5:1 ratio.",
+    "focus_states": "All focusable elements must have a visible high-contrast ring.",
+    "reduced_motion": "Respect prefers-reduced-motion media query for framer-motion animations."
+  },
+  "components": {
+    "required_shadcn_components": [
+      "Button",
+      "Input",
+      "Tabs",
+      "Card",
+      "Form",
+      "Sonner"
+    ],
+    "custom_components": [
+      "MixedWeightHeading",
+      "FeatureGrid",
+      "AudienceCard",
+      "TestimonialPlaceholder"
+    ]
+  }
+}
