@@ -56,8 +56,13 @@
 - Frontend `ReserveForm.jsx`: live debounced availability, submit disabled until available + email, success card "yourname@bozzmail.com is reserved · #N in line" with Copy + Share (Web Share API / clipboard fallback)
 - Tests: `/app/backend/tests/test_reservations.py` (14 tests)
 
+## Pricing + confirmation email (2026-10-16) — DONE, tested (iteration_3: backend 16/16, frontend 100%)
+- `Pricing.jsx` "Planned pricing": Free €0 / Revolutionary €3 (yearly, €3,60 monthly, Most popular) / Legend €8 (yearly, €9,60 monthly); monthly/yearly toggle; CTAs → #reserve; nav + footer "Pricing" links; placed after security grid
+- `emailer.py`: Emergent-managed Resend proxy (EMERGENT_EMAIL_KEY, EMAIL_FROM_NAME=Bozzmail, APP_PUBLIC_URL in backend/.env; EMAIL_BASE_URL constant), playbook guardrail gate on every send, branded table-based template (address, position, invite link to APP_PUBLIC_URL)
+- `reservations.py`: BackgroundTasks → deliver_confirmation records `confirmation_email {status: sent|paused|failed, id, sent_at}` on the reservation; GET /api/reservations/{id}/status
+- NOTE: APP_PUBLIC_URL currently points to the preview URL — set to https://bozzmail.com at production deploy. Sender address is the platform's managed sender with display name "Bozzmail".
+
 ## Backlog
-- P1: Pricing section (Tuta-like plan table)
 - P1: SEO (OG tags, sitemap — farm-seo-setup skill)
 - P1: Admin view / CSV export of waitlist
 - P2: Rate limiting on POST /api/waitlist; store created_at as BSON datetime

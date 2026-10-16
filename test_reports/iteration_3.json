@@ -1,0 +1,19 @@
+{
+  "summary": "Tested the two new iteration-3 features (Planned pricing section + branded confirmation email background task) plus mobile/overflow regression. Backend: all 16 pytest tests in /app/backend/tests/test_reservations.py pass (incl. test_confirmation_email_is_sent_in_background and test_status_404_for_unknown_id). Backend log confirms 'POST https://integrations.emergentagent.com/api/v1/email/send \"HTTP/1.1 202 Accepted\"' for the delivered@resend.dev send. Frontend: pricing-section renders between FeatureGrid and Business; title 'Planned pricing'; three plan cards (plan-free €0, plan-revolutionary €3 with plan-popular-badge 'Most popular', plan-legend €8) yearly by default with 'Billed yearly (€36 / year)' and '(€96 / year)' sub-text; billing-toggle-switch flips to monthly €3,60 / €9,60 and 'Billed monthly' and back to yearly correctly; nav-link-pricing present; footer has an a[href=#pricing] link; security grid 'Check Bozzmail's plans' link href=#pricing; plan-free-cta/plan-revolutionary-cta/plan-legend-cta each scroll to #reserve with hero-reserve-form visible. Hero reservation happy-path still works: success card text now reads 'Reserved for you <address> You're #N in line. A confirmation is on its way to <email> — we'll send your launch invite there too.' Mobile 390x844: document.scrollWidth=390 (no horizontal overflow), cards stack vertically (x=16, width=358 each), popular badge box within viewport, toggle usable, no overflow after toggling. Cleaned up test reservations (delivered@resend.dev + qauix* created during UI test).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/test_reservations.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "emailer.py reads os.environ['EMERGENT_EMAIL_KEY'] at import time; if the key is removed the whole app fails to boot. Consider lazy-loading or EmailPaused fallback at import.",
+    "Confirmation email failures for non-deliverable test domains (e.g. @example.com used by other QA tests) are logged as ERROR (Client error 422). Expected but noisy — could downgrade non-5xx provider errors to WARNING."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (16/16)", "frontend": "100%"},
+  "test_credentials": "none required",
+  "seed_data_creation": "Created and then deleted one qauix<ts>@example.com reservation during UI happy-path test, and one delivered@resend.dev reservation during pytest email test.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Hero reserve inputs use testids hero-reserve-handle-input / -email-input / -submit-button (NOT hero-reserve-handle). hero-reserve-form appears twice in DOM when scrolled (sticky variant + original) — pick the visible one. Pricing testids: pricing-section, pricing-title, billing-toggle-switch, plan-{free|revolutionary|legend}, plan-{key}-price, plan-popular-badge, plan-{key}-cta, nav-link-pricing. For the email test only use delivered@resend.dev and clean up after.",
+  "rca of the issue": "n/a - no issues found"
+}
