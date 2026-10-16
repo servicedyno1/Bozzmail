@@ -1,5 +1,5 @@
 import { Section, SectionTitle } from "./Section";
-import { WaitlistForm } from "./WaitlistForm";
+import { ReserveForm } from "./ReserveForm";
 
 export const CTABand = () => (
   <Section bg="bg-nota" className="!pb-0" testid="cta-band">
@@ -12,7 +12,7 @@ export const CTABand = () => (
       That's why Bozzmail Mail will be free, forever.
     </p>
     <div className="flex justify-center">
-      <WaitlistForm idPrefix="cta-waitlist" variant="yellow" buttonLabel="Reserve your free account" className="justify-center" />
+      <ReserveForm idPrefix="cta-reserve" variant="yellow" buttonLabel="Reserve my free address" />
     </div>
     <img
       src="/illustrations/free_phone.webp"

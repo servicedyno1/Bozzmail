@@ -76,7 +76,7 @@ export const FeatureGrid = () => (
         <div className="flex flex-col">
           <h3 className="text-[length:var(--text-ml)] font-bold">Best value for your domain</h3>
           <p className="mt-3 text-base">Use Bozzmail with your own custom domain and an unlimited number of alias email addresses.</p>
-          <Link href="#waitlist" light={false}>Check Bozzmail's plans</Link>
+          <Link href="#reserve" light={false}>Check Bozzmail's plans</Link>
         </div>
       </div>
     </div>

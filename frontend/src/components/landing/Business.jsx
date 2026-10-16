@@ -21,7 +21,7 @@ export const Business = () => (
         <p>Bozzmail is built for businesses — from small studios to financial institutions and human-rights organizations — that need to protect their professional emails and calendars.</p>
         <p className="mt-5">Save time and money by storing all your business emails end-to-end encrypted and protected by strong data-protection laws. Benefit from cost-efficiency, high availability, flexibility and automatic backup — without compromising on security or digital sovereignty.</p>
         <p className="mt-5 font-bold">Be among the first organizations to choose Bozzmail to safeguard their data.</p>
-        <a href="#waitlist" className="btn-tuta mt-5 bg-tutao text-white" data-testid="business-cta">Bozzmail for business</a>
+        <a href="#reserve" className="btn-tuta mt-5 bg-tutao text-white" data-testid="business-cta">Bozzmail for business</a>
       </div>
     </Reveal>
   </Section>

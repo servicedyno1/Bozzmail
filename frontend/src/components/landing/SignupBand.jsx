@@ -1,6 +1,6 @@
 import { Lock } from "lucide-react";
 import { Section, SectionTitle } from "./Section";
-import { WaitlistForm } from "./WaitlistForm";
+import { ReserveForm } from "./ReserveForm";
 
 export const SignupBand = () => (
   <Section bg="bg-nota" testid="signup-band">
@@ -13,7 +13,7 @@ export const SignupBand = () => (
       <p className="mt-1 text-[length:var(--text-m)] font-bold italic">"Encrypted email. Zero tracking. Forever."</p>
     </div>
     <div className="flex justify-center">
-      <WaitlistForm idPrefix="band-waitlist" variant="dark" buttonLabel="Join the waitlist" className="justify-center" />
+      <ReserveForm idPrefix="band-reserve" variant="dark" />
     </div>
   </Section>
 );

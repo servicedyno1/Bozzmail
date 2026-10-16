@@ -78,7 +78,7 @@ export const Mission = () => (
           Hi, we are the Bozzmail team. We build the most secure email, calendar and contacts service so you can take control of your data. Our mission is to bring privacy to everyone, with freedom and zero tracking. Be part of it.
         </p>
         <div className="mt-6 flex justify-end">
-          <a href="#waitlist" className="btn-tuta bg-fighter text-white" data-testid="jobs-button">
+          <a href="#reserve" className="btn-tuta bg-fighter text-white" data-testid="jobs-button">
             <Server className="h-4 w-4" /> Get early access
           </a>
         </div>

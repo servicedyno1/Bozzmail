@@ -59,7 +59,7 @@ export const Footer = () => (
       <div className="mt-14 flex flex-wrap items-end justify-between gap-6">
         <div className="flex flex-wrap gap-3">
           <a href="mailto:hello@bozzmail.com" className="rounded-[6px] border border-dark-peach px-4 py-2 text-sm font-semibold hover:bg-peach">Contact us</a>
-          <a href="#waitlist" className="rounded-[6px] border border-dark-peach px-4 py-2 text-sm font-semibold hover:bg-peach">Join waitlist</a>
+          <a href="#reserve" className="rounded-[6px] border border-dark-peach px-4 py-2 text-sm font-semibold hover:bg-peach">Reserve address</a>
         </div>
         <div className="flex items-center gap-4" aria-hidden="true">
           <span className="inline-flex items-center gap-2 rounded-full bg-green-candy px-4 py-2 text-xs font-black uppercase tracking-wide text-green-tutao"><Leaf className="h-4 w-4" /> 100% green energy</span>

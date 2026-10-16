@@ -16,7 +16,7 @@ export const AnnouncementBar = () => (
     className="relative z-40 bg-green-tutao px-4 py-1.5 text-center text-xs font-semibold text-white sm:text-[13px]"
     data-testid="announcement-bar"
   >
-    Bozzmail is launching soon<span className="hidden sm:inline"> — join the waitlist for early access</span>.
+    Bozzmail is launching soon<span className="hidden sm:inline"> — reserve your @bozzmail.com address before someone else does</span>.
   </div>
 );
 
@@ -64,11 +64,11 @@ export const Header = () => {
             Why Bozzmail
           </a>
           <a
-            href="#waitlist"
+            href="#reserve"
             className="rounded-[6px] border border-nota bg-nota px-3 py-1.5 font-semibold text-white transition-[filter] hover:brightness-110"
             data-testid="nav-cta-button"
           >
-            Join waitlist
+            Reserve address
           </a>
         </div>
 
@@ -87,12 +87,12 @@ export const Header = () => {
         <nav className="border-t border-peach px-4 pb-4 pt-3 lg:hidden" data-testid="nav-mobile-menu">
           <div className="mb-3 flex flex-col gap-2 border-b border-peach pb-3">
             <a
-              href="#waitlist"
+              href="#reserve"
               onClick={() => setOpen(false)}
               className="rounded-[6px] bg-nota px-3 py-2 text-center font-semibold text-white"
               data-testid="nav-mobile-cta"
             >
-              Join waitlist
+              Reserve address
             </a>
             <a
               href="#better-web"

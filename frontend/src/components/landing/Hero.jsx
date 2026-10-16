@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { WaitlistForm } from "./WaitlistForm";
+import { ReserveForm } from "./ReserveForm";
 
 const ON = "Turn ON Privacy";
 const OFF = "Turn OFF Surveillance";
@@ -59,16 +59,16 @@ export const Hero = () => {
           {title}
         </h1>
         <p className="mb-8 max-w-2xl text-base text-peach md:mb-10 md:text-[length:var(--text-m)]" data-testid="hero-subtitle">
-          Take back your data with Bozzmail's encrypted email, calendar and contacts.
+          Reserve your @bozzmail.com address today. Encrypted email, calendar and contacts — free forever.
         </p>
 
-        <div id="waitlist" className="flex w-full justify-center scroll-mt-32">
-          <WaitlistForm idPrefix="hero-waitlist" variant={off ? "fighter" : "yellow"} className="justify-center" />
+        <div id="reserve" className="flex w-full justify-center scroll-mt-32">
+          <ReserveForm idPrefix="hero-reserve" variant={off ? "fighter" : "yellow"} />
         </div>
 
         <motion.div
           style={{ scale }}
-          className="relative mt-4 w-[270px] origin-top md:mt-8 md:w-[280px]"
+          className="relative mt-2 w-[270px] origin-top md:mt-4 md:w-[280px]"
           data-testid="hero-switch"
         >
           <div className="relative aspect-[848/1264] w-full">

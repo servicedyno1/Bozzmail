@@ -10,6 +10,7 @@ from pydantic import BaseModel
 from typing import List
 import uuid
 from datetime import datetime, timezone
+from reservations import build_router as build_reservations_router, ensure_indexes
 
 
 ROOT_DIR = Path(__file__).parent
@@ -80,7 +81,8 @@ async def waitlist_count():
     return {"count": count}
 
 
-# Include the router in the main app
+# Include the routers in the main app
+api_router.include_router(build_reservations_router(db))
 app.include_router(api_router)
 
 app.add_middleware(
@@ -97,6 +99,11 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+@app.on_event("startup")
+async def create_indexes():
+    await ensure_indexes(db)
 
 
 @app.on_event("shutdown")
