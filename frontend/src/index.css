@@ -106,8 +106,14 @@
         padding-right: 1rem;
     }
     .section-pad {
-        padding-top: var(--size-xxxl);
-        padding-bottom: var(--size-xxxl);
+        padding-top: 64px;
+        padding-bottom: 64px;
+    }
+    @media (min-width: 768px) {
+        .section-pad {
+            padding-top: var(--size-xxxl);
+            padding-bottom: var(--size-xxxl);
+        }
     }
     .section-title {
         font-size: var(--text-xl);

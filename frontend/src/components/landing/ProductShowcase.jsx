@@ -29,7 +29,7 @@ const products = {
 
 const UspList = ({ usps, active, onSelect, prefix }) => (
   <ul className="relative" data-testid={`${prefix}-usp-list`}>
-    <span className="absolute bottom-10 left-[35px] top-10 w-px bg-candy" aria-hidden="true" />
+    <span className="absolute bottom-10 left-[27px] top-10 w-px bg-candy md:left-[35px]" aria-hidden="true" />
     {usps.map((u, i) => {
       const isActive = i === active;
       return (
@@ -37,15 +37,15 @@ const UspList = ({ usps, active, onSelect, prefix }) => (
           <button
             type="button"
             onClick={() => onSelect(i)}
-            className="flex w-full items-start gap-5 rounded-[6px] px-0 py-4 text-left transition-colors hover:bg-peach/60"
+            className="flex w-full items-start gap-3 rounded-[6px] px-0 py-3 text-left transition-colors hover:bg-peach/60 md:gap-5 md:py-4"
             data-testid={`${prefix}-usp-${i}`}
             aria-pressed={isActive}
           >
-            <span className="flex w-[72px] shrink-0 justify-center pt-0.5">
+            <span className="flex w-[56px] shrink-0 justify-center pt-0.5 md:w-[72px]">
               <span
                 className={`flex items-center justify-center rounded-full transition-all duration-300 ${
                   isActive
-                    ? "h-14 w-14 bg-fighter text-white outline-dashed outline-2 outline-offset-4 outline-candy"
+                    ? "h-12 w-12 bg-fighter text-white outline-dashed outline-2 outline-offset-4 outline-candy md:h-14 md:w-14"
                     : "h-10 w-10 bg-candy text-nota/70"
                 }`}
               >
@@ -94,7 +94,7 @@ export const ProductShowcase = () => {
         })}
       </div>
 
-      <div className="rounded-b-[6px] bg-white px-5 py-8 md:px-10 md:py-12" role="tabpanel" data-testid={`product-panel-${tab}`}>
+      <div className="rounded-b-[6px] bg-white px-4 py-6 md:px-10 md:py-12" role="tabpanel" data-testid={`product-panel-${tab}`}>
         <h3 className="mb-6 text-[length:var(--text-l)] font-bold leading-tight text-dunkel" data-testid="product-heading">{p.heading}</h3>
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.05fr]">
           <UspList usps={p.usps} active={active} onSelect={setActive} prefix={tab} />

@@ -45,10 +45,10 @@ export const Hero = () => {
   const title = useScramble(off ? OFF : ON);
 
   return (
-    <div ref={wrap} id="top" className="relative h-[calc(500px+120vh)] md:h-[calc(900px+120vh)]" data-testid="hero-wrap">
+    <div ref={wrap} id="top" className="relative h-[calc(800px+120vh)] md:h-[calc(900px+120vh)]" data-testid="hero-wrap">
       <motion.section
         style={{ backgroundColor: bg }}
-        className="sticky top-0 flex h-[max(100vh,720px)] w-full flex-col items-center overflow-hidden px-4 pt-[18vh] text-center md:pt-[20vh]"
+        className="sticky top-0 flex h-[max(100svh,720px)] w-full flex-col items-center overflow-hidden px-4 pt-[16vh] text-center md:pt-[20vh]"
         data-testid="hero-section"
         data-state={off ? "off" : "on"}
       >
@@ -68,7 +68,7 @@ export const Hero = () => {
 
         <motion.div
           style={{ scale }}
-          className="relative mt-6 w-[230px] origin-top md:mt-8 md:w-[280px]"
+          className="relative mt-4 w-[270px] origin-top md:mt-8 md:w-[280px]"
           data-testid="hero-switch"
         >
           <div className="relative aspect-[848/1264] w-full">

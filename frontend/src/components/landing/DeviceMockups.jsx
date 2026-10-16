@@ -52,8 +52,8 @@ const Desktop = ({ kind }) => (
         <Search className="h-3 w-3" /> Search
       </span>
     </div>
-    <div className="grid h-[320px] grid-cols-[96px_1fr]">
-      <aside className="border-r border-peach p-2">
+    <div className="grid h-[320px] grid-cols-1 sm:grid-cols-[96px_1fr]">
+      <aside className="hidden border-r border-peach p-2 sm:block">
         {folders.map((f) => (
           <div key={f.label} className={`mb-0.5 flex items-center gap-1.5 rounded px-1.5 py-1 text-[10px] font-semibold ${f.active ? "bg-nota text-white" : "text-dunkel/70"}`}>
             <f.icon className="h-3 w-3 shrink-0" />

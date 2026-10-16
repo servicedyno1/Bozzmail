@@ -13,10 +13,10 @@ const links = [
 
 export const AnnouncementBar = () => (
   <div
-    className="relative z-40 bg-green-tutao px-4 py-1.5 text-center text-[13px] font-semibold text-white"
+    className="relative z-40 bg-green-tutao px-4 py-1.5 text-center text-xs font-semibold text-white sm:text-[13px]"
     data-testid="announcement-bar"
   >
-    Bozzmail is launching soon — join the waitlist for early access.
+    Bozzmail is launching soon<span className="hidden sm:inline"> — join the waitlist for early access</span>.
   </div>
 );
 

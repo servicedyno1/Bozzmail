@@ -44,6 +44,11 @@
 ## Testing (iteration_1, 2026-10-16)
 - Backend 100% (8/8), frontend ~95% → one mobile overflow bug fixed (responsive logo in tabs); scrollWidth = 390 verified
 
+## Mobile optimization (2026-10-16) — DONE
+- Section padding 64px on mobile (96px ≥768px), single-line announcement bar, larger hero switch, 100svh hero, longer mobile hero scroll range
+- USP timeline compacted (56px icon column), desktop-mockup sidebar hidden <sm, orphan 5th audience card centered, min-height on audience copy
+- Verified via `/app/frontend/tests/mobile_audit.py` (screens + overflow offenders) and `mobile_flow.py` (menu, hero toggle, waitlist submit, tabs, no JS errors, scrollWidth 390)
+
 ## Backlog
 - P1: Pricing section (Tuta-like plan table)
 - P1: SEO (OG tags, sitemap — farm-seo-setup skill)

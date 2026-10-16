@@ -19,12 +19,12 @@ export const Audiences = () => (
         <Reveal
           key={a.title}
           delay={i * 0.06}
-          className="flex flex-col overflow-hidden rounded-[6px] bg-peach pt-6 text-center"
+          className="flex flex-col overflow-hidden rounded-[6px] bg-peach pt-6 text-center last:col-span-2 last:mx-auto last:w-[calc(50%-0.5rem)] md:last:col-span-1 md:last:w-auto"
           data-testid={`audience-card-${a.title.toLowerCase()}`}
         >
           <a.icon className="mx-auto h-9 w-9 text-fighter" strokeWidth={2} />
           <h3 className="mt-2 text-[length:var(--text-ml)] font-bold text-dunkel">{a.title}</h3>
-          <p className="mx-auto mt-2 max-w-[200px] px-3 text-base text-dunkel">{a.text}</p>
+          <p className="mx-auto mt-2 min-h-[3.25rem] max-w-[200px] px-3 text-sm text-dunkel md:text-base">{a.text}</p>
           <img src={a.image} alt={`Illustration representing ${a.title.toLowerCase()} users.`} loading="lazy" className="mt-5 aspect-[4/5] w-full object-cover object-top" />
         </Reveal>
       ))}
