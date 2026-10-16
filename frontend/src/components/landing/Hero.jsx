@@ -1,102 +1,94 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { WaitlistForm } from "./WaitlistForm";
-import { Reveal } from "./Reveal";
 
-const PrivacyToggle = () => {
-  const [on, setOn] = useState(true);
+const ON = "Turn ON Privacy";
+const OFF = "Turn OFF Surveillance";
+const GLYPHS = "$#%&@!?*01<>/";
 
-  return (
-    <div className="flex flex-col items-center gap-6">
-      <button
-        onClick={() => setOn(!on)}
-        aria-pressed={on}
-        aria-label="Toggle privacy"
-        data-testid="hero-privacy-toggle"
-        className={`relative h-28 w-56 cursor-pointer rounded-full border-4 transition-colors duration-500 sm:h-36 sm:w-72 ${
-          on ? "border-[#015f47] bg-[#015f47]" : "border-[#d8d5cc] bg-[#e9e7e0]"
-        }`}
-      >
-        <motion.span
-          layout
-          transition={{ type: "spring", stiffness: 500, damping: 32 }}
-          className={`absolute top-1/2 h-20 w-20 -translate-y-1/2 rounded-full bg-white shadow-[0_6px_20px_rgba(27,21,38,0.25)] sm:h-28 sm:w-28 ${
-            on ? "right-2" : "left-2"
-          }`}
-        >
-          <span
-            className={`absolute inset-0 m-auto h-8 w-8 rounded-full border-4 transition-colors duration-500 sm:h-10 sm:w-10 ${
-              on ? "border-[#015f47]" : "border-[#b9b5ab]"
-            }`}
-          />
-        </motion.span>
-        <span
-          className={`absolute top-1/2 -translate-y-1/2 font-display text-sm font-bold uppercase tracking-[0.2em] transition-all duration-500 sm:text-base ${
-            on ? "left-5 text-white/90 sm:left-7" : "right-5 text-[#8f8a80] sm:right-7"
-          }`}
-        >
-          {on ? "ON" : "OFF"}
-        </span>
-      </button>
-      <p
-        className="font-display text-xs font-bold uppercase tracking-[0.3em] text-ink-muted"
-        data-testid="hero-toggle-caption"
-      >
-        {on ? "Privacy: enabled" : "Tap to turn privacy on"}
-      </p>
-    </div>
-  );
+const useScramble = (target) => {
+  const [text, setText] = useState(target);
+  useEffect(() => {
+    let frame = 0;
+    const total = 14;
+    const id = setInterval(() => {
+      frame += 1;
+      const reveal = Math.floor((frame / total) * target.length);
+      setText(
+        target
+          .split("")
+          .map((c, i) => (c === " " || i < reveal ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
+          .join("")
+      );
+      if (frame >= total) {
+        setText(target);
+        clearInterval(id);
+      }
+    }, 38);
+    return () => clearInterval(id);
+  }, [target]);
+  return text;
 };
 
 export const Hero = () => {
+  const wrap = useRef(null);
+  const [off, setOff] = useState(false);
+  const { scrollYProgress } = useScroll({ target: wrap, offset: ["start start", "end end"] });
+
+  const bg = useTransform(scrollYProgress, [0.22, 0.55], ["#d93951", "#410002"]);
+  const onOpacity = useTransform(scrollYProgress, [0.3, 0.42], [1, 0]);
+  const offOpacity = useTransform(scrollYProgress, [0.3, 0.42], [0, 1]);
+  const fingerY = useTransform(scrollYProgress, [0.2, 0.45], [120, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1.12]);
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => setOff(v > 0.38));
+  const title = useScramble(off ? OFF : ON);
+
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden bg-paper pb-24 pt-32 md:pb-32 md:pt-44"
-      data-testid="hero-section"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-[#f4f3ee]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-52 bottom-0 h-[26rem] w-[26rem] rounded-full bg-[#f4f3ee]"
-      />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 md:px-12 lg:grid-cols-2 lg:gap-20">
-        <div>
-          <Reveal>
-            <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#e6e4dc] bg-white px-4 py-1.5 text-xs font-medium tracking-wide text-ink-muted">
-              <span className="h-2 w-2 rounded-full bg-[#015f47]" />
-              Encrypted email, calendar &amp; contacts
-            </p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-light leading-[1.02] tracking-tight text-ink">
-              Turn ON{" "}
-              <span className="font-extrabold text-brand">Privacy.</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
-              Take back your data with Bozzmail's encrypted email, calendar and
-              contacts. No tracking, no ads, no compromise.
-            </p>
-          </Reveal>
-          <Reveal delay={0.24} className="mt-9">
-            <div id="waitlist" className="scroll-mt-32">
-              <WaitlistForm idPrefix="hero-waitlist" />
-              <p className="mt-4 text-xs text-ink-muted" data-testid="hero-waitlist-note">
-                Free forever. Be first in line when Bozzmail launches.
-              </p>
-            </div>
-          </Reveal>
+    <div ref={wrap} id="top" className="relative h-[calc(500px+120vh)] md:h-[calc(900px+120vh)]" data-testid="hero-wrap">
+      <motion.section
+        style={{ backgroundColor: bg }}
+        className="sticky top-0 flex h-[max(100vh,720px)] w-full flex-col items-center overflow-hidden px-4 pt-[18vh] text-center md:pt-[20vh]"
+        data-testid="hero-section"
+        data-state={off ? "off" : "on"}
+      >
+        <h1
+          className="font-mono-display mb-2 text-[min(11vw,4.5rem)] font-semibold leading-[1.1] text-peach md:text-[min(7vw,100px)]"
+          data-testid="hero-title"
+        >
+          {title}
+        </h1>
+        <p className="mb-8 max-w-2xl text-base text-peach md:mb-10 md:text-[length:var(--text-m)]" data-testid="hero-subtitle">
+          Take back your data with Bozzmail's encrypted email, calendar and contacts.
+        </p>
+
+        <div id="waitlist" className="flex w-full justify-center scroll-mt-32">
+          <WaitlistForm idPrefix="hero-waitlist" variant={off ? "fighter" : "yellow"} className="justify-center" />
         </div>
 
-        <Reveal delay={0.2} className="flex justify-center lg:justify-end">
-          <PrivacyToggle />
-        </Reveal>
-      </div>
-    </section>
+        <motion.div
+          style={{ scale }}
+          className="relative mt-6 w-[230px] origin-top md:mt-8 md:w-[280px]"
+          data-testid="hero-switch"
+        >
+          <div className="relative aspect-[848/1264] w-full">
+            <motion.img
+              src="/illustrations/switch-on.webp"
+              alt="Illustrated light switch turned on"
+              style={{ opacity: onOpacity }}
+              className="absolute inset-0 h-full w-full select-none"
+              draggable="false"
+            />
+            <motion.img
+              src="/illustrations/switch-off-finger.webp"
+              alt="A finger pressing the light switch off"
+              style={{ opacity: offOpacity, y: fingerY }}
+              className="absolute inset-0 h-full w-full select-none"
+              draggable="false"
+            />
+          </div>
+        </motion.div>
+      </motion.section>
+    </div>
   );
 };

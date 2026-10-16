@@ -1,26 +1,29 @@
-import { Header } from "@/components/landing/Header";
+import { Header, AnnouncementBar } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
 import { ProductShowcase } from "@/components/landing/ProductShowcase";
 import { Values } from "@/components/landing/Values";
-import { DarkBand } from "@/components/landing/DarkBand";
+import { SignupBand } from "@/components/landing/SignupBand";
 import { DownloadSection } from "@/components/landing/DownloadSection";
 import { Mission } from "@/components/landing/Mission";
 import { FeatureGrid } from "@/components/landing/FeatureGrid";
+import { Business } from "@/components/landing/Business";
 import { Audiences } from "@/components/landing/Audiences";
 import { CTABand } from "@/components/landing/CTABand";
 import { Footer } from "@/components/landing/Footer";
 
 export default function LandingPage() {
   return (
-    <main className="bg-paper" data-testid="landing-page">
+    <main className="bg-white" data-testid="landing-page">
+      <AnnouncementBar />
       <Header />
       <Hero />
       <ProductShowcase />
       <Values />
-      <DarkBand />
+      <SignupBand />
       <DownloadSection />
       <Mission />
       <FeatureGrid />
+      <Business />
       <Audiences />
       <CTABand />
       <Footer />

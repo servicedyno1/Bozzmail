@@ -15,6 +15,22 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)'
       },
       colors: {
+        nota: 'var(--red-nota)',
+        tutao: 'var(--red-tutao)',
+        dunkel: 'var(--red-dunkel)',
+        fighter: 'var(--red-fighter)',
+        candy: 'var(--red-candy)',
+        'candy-light': 'var(--red-candy-light)',
+        peach: 'var(--peach)',
+        'dark-peach': 'var(--dark-peach)',
+        'yellow-action': 'var(--yellow-action)',
+        sonne: 'var(--yellow-sonne)',
+        'green-tutao': 'var(--green-tutao)',
+        'green-nota': 'var(--green-nota)',
+        'green-candy': 'var(--green-candy)',
+        lavender: 'var(--lavender)',
+        navy: 'var(--navy)',
+        teal: 'var(--teal)',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

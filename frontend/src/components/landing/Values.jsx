@@ -1,67 +1,90 @@
-import { ShieldCheck, Leaf, EyeOff, Quote } from "lucide-react";
-import { Reveal, MixedHeading } from "./Reveal";
+import { useState } from "react";
+import { ShieldCheck, Leaf, Hand } from "lucide-react";
+import { Section, SectionTitle, Reveal } from "./Section";
 
-const values = [
+const usps = [
   {
     icon: ShieldCheck,
     title: "Secure",
-    color: "#850122",
-    bg: "#fdf0f2",
-    body: "Everything you store is encrypted end-to-end with post-quantum cryptography — before it ever leaves your device.",
-    placeholder: "Your story about security could be here.",
+    text: "Bozzmail automatically encrypts all your data end-to-end with post-quantum cryptography, which makes it the safest way to email.",
+    image: "/illustrations/usp_secure.webp",
+    alt: "Illustration of a woman working on a laptop next to a large shield with a padlock.",
+    quotes: [
+      "Encryption is the only privacy guarantee that doesn't depend on trust.",
+      "Your keys are generated on your device. They never leave it unencrypted.",
+      "Post-quantum algorithms protect today's mail from tomorrow's computers.",
+    ],
   },
   {
     icon: Leaf,
     title: "Green",
-    color: "#015f47",
-    bg: "#eef5f1",
-    body: "We take responsibility seriously: Bozzmail runs on renewable energy, so privacy never costs the planet.",
-    placeholder: "Your story about sustainability could be here.",
+    text: "We take our responsibility seriously and only use renewable energy to power your emails, calendars and contacts.",
+    image: "/illustrations/usp_green.webp",
+    alt: "Illustration of a wind turbine, solar panels and an enlarged light bulb symbolizing renewable energy.",
+    quotes: [
+      "Privacy should never cost the planet. Our servers run on 100% renewable power.",
+      "Efficient code is green code: less data moved, less energy burned.",
+      "A free plan with no ads means no server farms crunching your behaviour.",
+    ],
   },
   {
-    icon: EyeOff,
+    icon: Hand,
     title: "Ad-free",
-    color: "#1b1526",
-    bg: "#f4f3ee",
-    body: "Freedom to communicate confidentially — no tracking, no profiling, no personalized ads. Ever.",
-    placeholder: "Your story about an ad-free inbox could be here.",
+    text: "We give you the freedom to communicate confidentially, without any tracking or personalized ads.",
+    image: "/illustrations/usp_adfree.webp",
+    alt: "Illustration of a man with a clipboard next to an enlarged shield with a stop hand symbol.",
+    quotes: [
+      "If the product is free and full of ads, you are the product. Bozzmail is funded by its users.",
+      "No tracking pixels. No profiling. No 'personalized' anything.",
+      "An inbox should be a quiet room, not a billboard.",
+    ],
   },
 ];
 
-export const Values = () => {
+const Bubble = ({ quotes, prefix }) => {
+  const [i, setI] = useState(0);
   return (
-    <section className="bg-paper py-24 md:py-32" data-testid="values-section">
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <Reveal>
-          <MixedHeading light="A better" bold="web." />
-        </Reveal>
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {values.map((v, i) => (
-            <Reveal key={v.title} delay={i * 0.1}>
-              <div
-                className="flex h-full flex-col rounded-3xl border border-[#e6e4dc] bg-white p-8 transition-shadow duration-300 hover:shadow-[0_20px_50px_-20px_rgba(27,21,38,0.15)]"
-                data-testid={`value-card-${v.title.toLowerCase().replace(/[^a-z]/g, "-")}`}
-              >
-                <span
-                  className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl"
-                  style={{ backgroundColor: v.bg }}
-                >
-                  <v.icon className="h-6 w-6" style={{ color: v.color }} strokeWidth={2.2} />
-                </span>
-                <h3 className="font-display text-2xl font-extrabold text-ink">{v.title}</h3>
-                <p className="mt-3 flex-1 leading-relaxed text-ink-muted">{v.body}</p>
-                <div className="mt-8 rounded-2xl border border-dashed border-[#d8d5cc] bg-[#faf9f6] p-5">
-                  <Quote className="mb-2 h-4 w-4 text-[#b9b5ab]" />
-                  <p className="text-sm italic text-[#9a95a3]">{v.placeholder}</p>
-                  <p className="mt-2 text-xs font-medium uppercase tracking-widest text-[#c5c2b8]">
-                    Early member spotlight — soon
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+    <div className="mt-2 flex flex-col items-center" data-testid={`${prefix}-bubble`}>
+      <div className="relative w-full max-w-[330px] rounded-[6px] border border-tutao bg-white px-5 py-4 text-center text-sm italic text-tutao">
+        <p data-testid={`${prefix}-quote`}>{quotes[i]}</p>
+        <svg className="absolute left-1/2 top-full -ml-3 -mt-px" width="24" height="64" viewBox="0 0 24 64" aria-hidden="true">
+          <path d="M1 0 L12 62 L23 0" fill="#fff" stroke="#850122" strokeWidth="1" />
+        </svg>
       </div>
-    </section>
+      <p className="mt-[72px] text-sm uppercase tracking-wide text-dunkel">The Bozzmail promise</p>
+      <div className="mt-3 flex gap-2.5" role="tablist">
+        {quotes.map((_, idx) => (
+          <button
+            key={idx}
+            type="button"
+            aria-label={`Show statement ${idx + 1}`}
+            aria-selected={idx === i}
+            role="tab"
+            onClick={() => setI(idx)}
+            className={`h-2.5 w-2.5 rounded-full transition-colors ${idx === i ? "bg-tutao" : "bg-candy hover:bg-dark-peach"}`}
+            data-testid={`${prefix}-dot-${idx}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
+
+export const Values = () => (
+  <Section id="better-web" bg="bg-white" testid="values-section">
+    <SectionTitle className="text-fighter" testid="values-title">
+      A better <strong>web</strong>
+    </SectionTitle>
+    <div className="grid gap-6 md:grid-cols-3">
+      {usps.map((u, idx) => (
+        <Reveal key={u.title} delay={idx * 0.08} className="rounded-[6px] bg-peach px-5 pb-10 pt-8 text-center" data-testid={`value-card-${u.title.toLowerCase()}`}>
+          <u.icon className="mx-auto h-10 w-10 text-fighter" strokeWidth={2.2} />
+          <h3 className="mt-3 text-[length:var(--text-l)] font-bold text-dunkel">{u.title}</h3>
+          <p className="mx-auto mt-4 max-w-sm text-base text-tutao">{u.text}</p>
+          <img src={u.image} alt={u.alt} loading="lazy" className="mx-auto mt-6 w-full max-w-[340px]" />
+          <Bubble quotes={u.quotes} prefix={`value-${u.title.toLowerCase()}`} />
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+);

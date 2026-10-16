@@ -1,14 +1,38 @@
 import { useState } from "react";
 import axios from "axios";
-import { Loader2, ArrowRight, Check } from "lucide-react";
+import { Loader2, Check } from "lucide-react";
 import { toast } from "sonner";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
-export const WaitlistForm = ({ idPrefix = "waitlist", dark = false }) => {
+const variants = {
+  // Yellow action button on red backgrounds (Tuta hero / "Forever free")
+  yellow: {
+    input: "bg-white text-dunkel placeholder:text-dunkel/50 border border-white focus-visible:ring-yellow-action",
+    button: "bg-yellow-action text-tutao border-2 border-yellow-action",
+  },
+  // Bright red button once the hero has switched to "OFF" (dark background)
+  fighter: {
+    input: "bg-white text-dunkel placeholder:text-dunkel/50 border border-white focus-visible:ring-fighter",
+    button: "bg-fighter text-white border-2 border-fighter",
+  },
+  // Burgundy button on the red-nota band
+  dark: {
+    input: "bg-white text-dunkel placeholder:text-dunkel/50 border border-white focus-visible:ring-white",
+    button: "bg-tutao text-white border-2 border-tutao",
+  },
+  // On light sections
+  light: {
+    input: "bg-white text-dunkel placeholder:text-dunkel/50 border border-dark-peach focus-visible:ring-nota",
+    button: "bg-nota text-white border-2 border-nota",
+  },
+};
+
+export const WaitlistForm = ({ idPrefix = "waitlist", variant = "yellow", buttonLabel = "Join the waitlist", className = "" }) => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const v = variants[variant];
 
   const submit = async (e) => {
     e.preventDefault();
@@ -32,18 +56,10 @@ export const WaitlistForm = ({ idPrefix = "waitlist", dark = false }) => {
     }
   };
 
-  const inputClasses = dark
-    ? "h-[52px] flex-1 rounded-full border-white/25 bg-white/10 px-5 py-3.5 text-white placeholder:text-white/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-    : "h-[52px] flex-1 rounded-full border-[#e6e4dc] bg-white px-5 py-3.5 text-ink placeholder:text-[#9a95a3] shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#850122]/40";
-
-  const buttonClasses = dark
-    ? "rounded-full bg-white text-[#850122] hover:bg-white/90 px-7 py-3.5 h-[52px] font-display font-bold tracking-wide transition-colors duration-200"
-    : "rounded-full bg-[#850122] text-white hover:bg-[#6d011b] px-7 py-3.5 h-[52px] font-display font-bold tracking-wide transition-colors duration-200";
-
   return (
     <form
       onSubmit={submit}
-      className="flex w-full max-w-md flex-col gap-3 sm:flex-row sm:items-center"
+      className={`flex w-full max-w-[520px] flex-col gap-2 sm:flex-row ${className}`}
       data-testid={`${idPrefix}-form`}
     >
       <input
@@ -53,23 +69,17 @@ export const WaitlistForm = ({ idPrefix = "waitlist", dark = false }) => {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@example.com"
         aria-label="Email address"
-        className={inputClasses}
+        className={`h-12 flex-1 rounded-[6px] px-4 text-base outline-none focus-visible:ring-2 ${v.input}`}
         data-testid={`${idPrefix}-email-input`}
       />
       <button
         type="submit"
         disabled={loading}
-        className={`${buttonClasses} flex shrink-0 items-center justify-center gap-2 whitespace-nowrap disabled:opacity-70`}
+        className={`btn-tuta h-12 shrink-0 disabled:opacity-70 ${v.button}`}
         data-testid={`${idPrefix}-submit-button`}
       >
-        {loading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : done ? (
-          <Check className="h-4 w-4" />
-        ) : (
-          <ArrowRight className="h-4 w-4" />
-        )}
-        {done ? "You're in" : "Join the waitlist"}
+        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : done ? <Check className="h-4 w-4" /> : null}
+        {done ? "You're on the list" : buttonLabel}
       </button>
     </form>
   );

@@ -1,31 +1,13 @@
-export const LogoMark = ({ size = 32, className = "" }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 48 48"
-    fill="none"
-    role="img"
-    aria-label="Bozzmail logo"
-    className={className}
-    data-testid="bozzmail-logo-mark"
-  >
-    <rect width="48" height="48" rx="13" fill="#850122" />
-    <rect x="12.5" y="10.5" width="6" height="27" rx="3" fill="#ffffff" />
-    <circle cx="27.5" cy="28" r="9.5" stroke="#ffffff" strokeWidth="6" />
-    <circle cx="27.5" cy="28" r="3.6" fill="#35d99a" />
-  </svg>
-);
-
-export const Logo = ({ dark = false }) => (
-  <span className="flex items-center gap-2.5">
-    <LogoMark size={32} />
-    <span
-      className={`font-display text-[22px] leading-none tracking-tight ${
-        dark ? "text-white" : "text-ink"
-      }`}
-    >
-      <span className="font-extrabold">Bozz</span>
-      <span className="font-light">mail</span>
+export const Logo = ({ className = "", size = "md", product }) => {
+  const mark = size === "lg" ? "h-12" : size === "sm" ? "h-7" : "h-9";
+  const text = size === "lg" ? "text-[2.1rem]" : size === "sm" ? "text-[1.25rem]" : "text-[1.6rem]";
+  return (
+    <span className={`inline-flex items-center gap-2 leading-none ${className}`} data-testid="bozzmail-logo">
+      <img src="/brand/mark-lettermark.png" alt="" aria-hidden="true" className={`${mark} w-auto select-none`} draggable="false" />
+      <span className={`font-bold italic tracking-[-0.02em] text-tutao ${text}`}>
+        bozzmail
+        {product ? <span className="ml-1.5 font-semibold not-italic tracking-normal">{product}</span> : null}
+      </span>
     </span>
-  </span>
-);
+  );
+};

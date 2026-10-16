@@ -3,19 +3,29 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 
 const links = [
-  { label: "Mail", href: "#showcase" },
-  { label: "Calendar", href: "#showcase" },
+  { label: "Mail", href: "#product" },
+  { label: "Calendar", href: "#product" },
   { label: "Security", href: "#security" },
-  { label: "Mission", href: "#mission" },
-  { label: "Who it's for", href: "#audiences" },
+  { label: "Download", href: "#download" },
+  { label: "Business", href: "#business" },
+  { label: "Mission", href: "#freedom-fighters" },
 ];
 
+export const AnnouncementBar = () => (
+  <div
+    className="relative z-40 bg-green-tutao px-4 py-1.5 text-center text-[13px] font-semibold text-white"
+    data-testid="announcement-bar"
+  >
+    Bozzmail is launching soon — join the waitlist for early access.
+  </div>
+);
+
 export const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
+  const [top, setTop] = useState(44);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setTop(window.scrollY > 24 ? 16 : 44);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -23,72 +33,85 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300 ${
-        scrolled
-          ? "bg-white/95 shadow-[0_1px_0_0_#e6e4dc] backdrop-blur-md"
-          : "bg-transparent"
-      }`}
+      className="fixed left-1/2 z-50 w-[calc(100%-20px)] max-w-[1286px] -translate-x-1/2 rounded-[6px] bg-white text-dunkel shadow-tuta-black transition-[top] duration-500 ease-in-out"
+      style={{ top }}
       data-testid="site-header"
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:h-20 md:px-12">
-        <a href="#top" data-testid="nav-brand-link" aria-label="Bozzmail home">
+      <div className="flex items-center justify-between px-3 py-2 lg:px-5 lg:py-3">
+        <a href="#top" data-testid="nav-brand-link" aria-label="Bozzmail home" className="flex items-center">
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-8 lg:flex" data-testid="nav-links">
+        <nav className="hidden items-center lg:flex" data-testid="nav-links">
           {links.map((l) => (
             <a
               key={l.label}
               href={l.href}
-              className="text-sm font-medium text-ink-muted transition-colors duration-200 hover:text-ink"
-              data-testid={`nav-link-${l.label.toLowerCase().replace(/[^a-z]/g, "-")}`}
+              className="rounded-[6px] px-4 py-2 text-base font-semibold leading-5 transition-colors duration-100 hover:bg-peach"
+              data-testid={`nav-link-${l.label.toLowerCase()}`}
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="hidden items-center gap-3 lg:flex">
+          <a
+            href="#better-web"
+            className="rounded-[6px] border border-nota px-3 py-1.5 font-semibold text-nota transition-colors hover:bg-candy-light"
+            data-testid="nav-secondary-button"
+          >
+            Why Bozzmail
+          </a>
           <a
             href="#waitlist"
-            className="hidden rounded-full bg-[#850122] px-6 py-2.5 font-display text-sm font-bold tracking-wide text-white transition-colors duration-200 hover:bg-[#6d011b] sm:inline-block"
+            className="rounded-[6px] border border-nota bg-nota px-3 py-1.5 font-semibold text-white transition-[filter] hover:brightness-110"
             data-testid="nav-cta-button"
           >
             Join waitlist
           </a>
-          <button
-            className="flex h-10 w-10 items-center justify-center rounded-full text-ink lg:hidden"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-            data-testid="nav-menu-toggle"
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
+
+        <button
+          className="flex h-10 w-10 items-center justify-center rounded-[6px] text-dunkel lg:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          data-testid="nav-menu-toggle"
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
       {open && (
-        <nav
-          className="border-t border-[#e6e4dc] bg-white px-6 py-4 lg:hidden"
-          data-testid="nav-mobile-menu"
-        >
+        <nav className="border-t border-peach px-4 pb-4 pt-3 lg:hidden" data-testid="nav-mobile-menu">
+          <div className="mb-3 flex flex-col gap-2 border-b border-peach pb-3">
+            <a
+              href="#waitlist"
+              onClick={() => setOpen(false)}
+              className="rounded-[6px] bg-nota px-3 py-2 text-center font-semibold text-white"
+              data-testid="nav-mobile-cta"
+            >
+              Join waitlist
+            </a>
+            <a
+              href="#better-web"
+              onClick={() => setOpen(false)}
+              className="rounded-[6px] border border-nota px-3 py-2 text-center font-semibold text-nota"
+            >
+              Why Bozzmail
+            </a>
+          </div>
           {links.map((l) => (
             <a
               key={l.label}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block py-3 text-base font-medium text-ink"
+              className="block rounded-[6px] px-3 py-2.5 font-semibold hover:bg-peach"
             >
               {l.label}
             </a>
           ))}
-          <a
-            href="#waitlist"
-            onClick={() => setOpen(false)}
-            className="mt-2 block rounded-full bg-[#850122] px-6 py-3 text-center font-display text-sm font-bold text-white"
-          >
-            Join waitlist
-          </a>
         </nav>
       )}
     </header>
