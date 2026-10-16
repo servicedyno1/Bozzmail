@@ -15,7 +15,7 @@ export const DownloadSection = () => {
     <section className="bg-paper py-24 md:py-32" data-testid="download-section">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <Reveal>
-          <MixedHeading light="Download" bold="Enclave." />
+          <MixedHeading light="Download" bold="Bozzmail." />
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mt-5 max-w-lg text-lg text-ink-muted">

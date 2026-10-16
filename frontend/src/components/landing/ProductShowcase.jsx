@@ -74,14 +74,14 @@ export const ProductShowcase = () => {
                 className="rounded-full px-6 py-2.5 font-display text-sm font-bold data-[state=active]:bg-[#850122] data-[state=active]:text-white"
                 data-testid="showcase-tab-mail"
               >
-                Enclave Mail
+                Bozz Mail
               </TabsTrigger>
               <TabsTrigger
                 value="calendar"
                 className="rounded-full px-6 py-2.5 font-display text-sm font-bold data-[state=active]:bg-[#850122] data-[state=active]:text-white"
                 data-testid="showcase-tab-calendar"
               >
-                Enclave Calendar
+                Bozz Calendar
               </TabsTrigger>
             </TabsList>
           </Reveal>

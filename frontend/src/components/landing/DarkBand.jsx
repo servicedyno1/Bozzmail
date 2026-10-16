@@ -12,7 +12,7 @@ export const DarkBand = () => {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="max-w-xl text-lg leading-relaxed text-white/60">
-            Big Tech reads your inbox to sell ads. Enclave can't — mathematically.
+            Big Tech reads your inbox to sell ads. Bozzmail can't — mathematically.
             End-to-end encryption means your data is yours, full stop.
           </p>
         </Reveal>

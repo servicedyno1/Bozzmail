@@ -17,7 +17,7 @@ export const WaitlistForm = ({ idPrefix = "waitlist", dark = false }) => {
     try {
       await axios.post(`${API}/waitlist`, { email: email.trim() });
       setDone(true);
-      toast.success("You're on the list. Welcome to Enclave.");
+      toast.success("You're on the list. Welcome to Bozzmail.");
     } catch (err) {
       if (err.response?.status === 409) {
         setDone(true);

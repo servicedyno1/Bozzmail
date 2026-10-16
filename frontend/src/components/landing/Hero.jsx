@@ -79,7 +79,7 @@ export const Hero = () => {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
-              Take back your data with Enclave's encrypted email, calendar and
+              Take back your data with Bozzmail's encrypted email, calendar and
               contacts. No tracking, no ads, no compromise.
             </p>
           </Reveal>
@@ -87,7 +87,7 @@ export const Hero = () => {
             <div id="waitlist" className="scroll-mt-32">
               <WaitlistForm idPrefix="hero-waitlist" />
               <p className="mt-4 text-xs text-ink-muted" data-testid="hero-waitlist-note">
-                Free forever. Be first in line when Enclave launches.
+                Free forever. Be first in line when Bozzmail launches.
               </p>
             </div>
           </Reveal>

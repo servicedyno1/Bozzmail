@@ -16,6 +16,13 @@
 - Design: light Tuta-faithful theme — paper #FDFDFA, ink #1B1526, crimson #850122, pine green #015F47; Cabinet Grotesk (display) + Satoshi (body) via Fontshare
 - Product mockups (Mail inbox, Calendar week) hand-built in JSX/CSS for Tuta-level fidelity
 
+## Branding (2026-10-16)
+- Real brand: Bozzmail (bozzmail.com)
+- Custom SVG logo mark: crimson squircle #850122, white geometric "b" (stem + bowl ring), mint "secured message" dot #35D99A
+- Mixed-weight wordmark: "Bozz" extrabold + "mail" light (Cabinet Grotesk)
+- favicon.svg + theme-color #850122 + SEO title/description in index.html
+- Full sweep: header, footer, hero, tabs, values, dark band, downloads, mission, toasts, backend root message
+
 ## Implemented (2026-10-16)
 - Sticky header with scroll state + mobile menu
 - Hero "Turn ON Privacy." with interactive animated privacy toggle + working waitlist form
@@ -36,7 +43,7 @@
 - Console: clean (AnimatePresence warnings fixed)
 
 ## Backlog
-- P0: Real brand name, logo, real differentiator copy from owner (currently placeholder brand "Enclave")
+- P0: Real brand name, logo, real differentiator copy from owner (currently brand "Bozzmail" (bozzmail.com) — DONE 2026-10-16)
 - P1: Pricing section (Tuta-like plan table)
 - P1: SEO setup (OG tags, sitemap — farm-seo-setup skill)
 - P2: i18n, blog/press section, admin view of waitlist signups

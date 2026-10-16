@@ -1,9 +1,9 @@
-import { Shield } from "lucide-react";
+import { Logo } from "./Logo";
 
 const columns = [
   {
     heading: "Product",
-    links: ["Enclave Mail", "Enclave Calendar", "Pricing", "Custom domains"],
+    links: ["Bozz Mail", "Bozz Calendar", "Pricing", "Custom domains"],
   },
   {
     heading: "Security",
@@ -25,13 +25,8 @@ export const Footer = () => {
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div>
-            <a href="#top" className="flex items-center gap-2" data-testid="footer-brand-link">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#850122]">
-                <Shield className="h-[18px] w-[18px] text-white" strokeWidth={2.4} />
-              </span>
-              <span className="font-display text-xl font-extrabold tracking-tight text-white">
-                Enclave
-              </span>
+            <a href="#top" data-testid="footer-brand-link" aria-label="Bozzmail home">
+              <Logo dark />
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
               Turn ON privacy. Encrypted email, calendar and contacts — free
@@ -61,7 +56,7 @@ export const Footer = () => {
         </div>
         <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-white/40" data-testid="footer-copyright">
-            © 2026 Enclave. A privacy-first concept — waitlist open now.
+            © 2026 Bozzmail — bozzmail.com. Privacy-first email, waitlist open now.
           </p>
           <p className="text-xs text-white/40">
             No trackers on this page. Obviously.

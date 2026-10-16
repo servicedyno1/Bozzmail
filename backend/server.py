@@ -41,7 +41,7 @@ class WaitlistEntry(BaseModel):
 
 @api_router.get("/")
 async def root():
-    return {"message": "Enclave API"}
+    return {"message": "Bozzmail API"}
 
 
 @api_router.post("/waitlist", response_model=WaitlistEntry, status_code=201)

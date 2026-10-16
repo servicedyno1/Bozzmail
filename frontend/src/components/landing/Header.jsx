@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Shield, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { Logo } from "./Logo";
 
 const links = [
   { label: "Mail", href: "#showcase" },
@@ -30,13 +31,8 @@ export const Header = () => {
       data-testid="site-header"
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:h-20 md:px-12">
-        <a href="#top" className="flex items-center gap-2" data-testid="nav-brand-link">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#850122]">
-            <Shield className="h-[18px] w-[18px] text-white" strokeWidth={2.4} />
-          </span>
-          <span className="font-display text-xl font-extrabold tracking-tight text-ink">
-            Enclave
-          </span>
+        <a href="#top" data-testid="nav-brand-link" aria-label="Bozzmail home">
+          <Logo />
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex" data-testid="nav-links">

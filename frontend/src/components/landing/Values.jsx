@@ -15,7 +15,7 @@ const values = [
     title: "Green",
     color: "#015f47",
     bg: "#eef5f1",
-    body: "We take responsibility seriously: Enclave runs on renewable energy, so privacy never costs the planet.",
+    body: "We take responsibility seriously: Bozzmail runs on renewable energy, so privacy never costs the planet.",
     placeholder: "Your story about sustainability could be here.",
   },
   {

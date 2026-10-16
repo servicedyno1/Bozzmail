@@ -13,12 +13,12 @@ const cards = [
   {
     icon: Flag,
     title: "Our privacy mission",
-    body: "Big tech companies use your personal information for profit. We started Enclave so everyone can have a safe space online — free from tracking and surveillance.",
+    body: "Big tech companies use your personal information for profit. We started Bozzmail so everyone can have a safe space online — free from tracking and surveillance.",
   },
   {
     icon: Users,
     title: "Built with our community",
-    body: "Enclave is being shaped by the people on our waitlist. Join early, tell us what privacy means to you, and help build it.",
+    body: "Bozzmail is being shaped by the people on our waitlist. Join early, tell us what privacy means to you, and help build it.",
     cta: true,
   },
 ];
