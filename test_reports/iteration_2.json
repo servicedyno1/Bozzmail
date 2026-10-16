@@ -1,0 +1,23 @@
+{
+  "summary": "Frontend-only testing of Bozzmail reservation flow (replaces previous waitlist). All 10 feature items pass on desktop (1920) and mobile (390). Live availability (admin reserved, 'ab' too short, 'John Doe' auto-lowercased/space-stripped to 'johndoe', unique handle shows checking->available), submit button enable/disable logic, happy path POST with success card + address + copy/share clipboard fallback with sonner toasts, taken-handle (409) response in band form, one-reservation-per-email error toast on cta form, invalid email error toast, nav-cta-button scrolling to #reserve, hero scroll state flip to 'off' with 'Turn OFF Surveillance' title and bright red bg-fighter (rgb(255,10,10)) submit button, announcement bar mentions reserving @bozzmail.com. Mobile 390x844: no horizontal overflow (scrollWidth=390), all three forms stack cleanly (width 358), @bozzmail.com suffix does not overlap typed text for a 19-char handle thanks to pr-[8.5rem].",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_reservations.py"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ReserveForm.jsx submit does not client-side validate email format; relies on backend 400. Works but adds a round-trip; consider inline validation.",
+    "useAvailability debounce is 350ms (spec mentioned ~400ms); acceptable."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped per request)", "frontend": "100%"},
+  "test_credentials": "none required",
+  "seed_data_creation": "Created two reservations via UI happy-path tests: qa<ts>@bozzmail.com and qa<ts2>c<...> handles with example emails.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Reservation UI fully working. Three forms: hero-reserve, band-reserve, cta-reserve. Toasts are sonner (top-center). Clipboard works after context.grant_permissions(['clipboard-read','clipboard-write']). Hero scroll state toggles at ~1200px scroll (data-state='off', bg-fighter red button).",
+  "rca of the issue": "n/a - no issues found"
+}

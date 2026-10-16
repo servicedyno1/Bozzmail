@@ -49,6 +49,13 @@
 - USP timeline compacted (56px icon column), desktop-mockup sidebar hidden <sm, orphan 5th audience card centered, min-height on audience copy
 - Verified via `/app/frontend/tests/mobile_audit.py` (screens + overflow offenders) and `mobile_flow.py` (menu, hero toggle, waitlist submit, tabs, no JS errors, scrollWidth 390)
 
+## Address reservation (2026-10-16) — DONE, tested (iteration_2: frontend 100%, backend 22/22 pytest)
+- Replaced the plain waitlist with "Reserve your @bozzmail.com address" in all 3 forms (hero, Turn OFF Surveillance band, Forever free band)
+- Backend `/app/backend/reservations.py`: GET /api/reservations/check?handle= (available / invalid / taken), POST /api/reservations {handle,email} (201 / 409 taken / 409 email already holds reservation / 422 invalid), GET /api/reservations/count; unique indexes on handle + email; blocklist of system/brand handles; rules 3–30 chars, [a-z0-9.-], no leading/trailing or adjacent dots/hyphens; case-insensitive
+- Collection `reservations`: {id, handle, address, email, position, created_at}. Legacy `waitlist` collection kept untouched
+- Frontend `ReserveForm.jsx`: live debounced availability, submit disabled until available + email, success card "yourname@bozzmail.com is reserved · #N in line" with Copy + Share (Web Share API / clipboard fallback)
+- Tests: `/app/backend/tests/test_reservations.py` (14 tests)
+
 ## Backlog
 - P1: Pricing section (Tuta-like plan table)
 - P1: SEO (OG tags, sitemap — farm-seo-setup skill)
