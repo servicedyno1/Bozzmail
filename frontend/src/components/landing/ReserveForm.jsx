@@ -61,7 +61,7 @@ const Success = ({ res, variant, prefix }) => {
       <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-fighter text-white"><Lock className="h-6 w-6" /></span>
       <p className="mt-3 text-sm uppercase tracking-wide text-dunkel/70">Reserved for you</p>
       <p className="mt-1 break-all text-[length:var(--text-ml)] font-bold text-tutao" data-testid={`${prefix}-success-address`}>{res.address}</p>
-      <p className="mt-2 text-sm text-dunkel/80">You're <strong>#{res.position}</strong> in line. We'll email <strong>{res.email}</strong> when your inbox is ready.</p>
+      <p className="mt-2 text-sm text-dunkel/80">You're <strong>#{res.position}</strong> in line. A confirmation is on its way to <strong>{res.email}</strong> — we'll send your launch invite there too.</p>
       <div className="mt-4 flex flex-wrap justify-center gap-2">
         <button type="button" onClick={copy} className="btn-tuta border border-dark-peach bg-white text-dunkel" data-testid={`${prefix}-copy-button`}><Copy className="h-4 w-4" /> Copy address</button>
         <button type="button" onClick={share} className="btn-tuta bg-nota text-white" data-testid={`${prefix}-share-button`}><Share2 className="h-4 w-4" /> Share</button>

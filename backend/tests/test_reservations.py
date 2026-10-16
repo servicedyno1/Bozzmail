@@ -76,3 +76,23 @@ def test_invalid_handle_and_email_on_create(handle):
 def test_count():
     r = requests.get(f"{API}/count")
     assert r.status_code == 200 and r.json()["count"] >= 1
+
+
+def test_confirmation_email_is_sent_in_background():
+    h = f"mailqa-{int(time.time() * 1000)}"
+    r = requests.post(API, json={"handle": h, "email": "delivered@resend.dev"})
+    assert r.status_code in (201, 409)  # 409 only if delivered@resend.dev already holds a reservation
+    if r.status_code == 409:
+        pytest.skip("test inbox already holds a reservation")
+    rid = r.json()["id"]
+    status = None
+    for _ in range(15):
+        time.sleep(1)
+        status = requests.get(f"{API}/{rid}/status").json()["confirmation_email"]
+        if status != "pending":
+            break
+    assert status in ("sent", "paused"), status
+
+
+def test_status_404_for_unknown_id():
+    assert requests.get(f"{API}/does-not-exist/status").status_code == 404

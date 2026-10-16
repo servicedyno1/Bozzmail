@@ -1,10 +1,15 @@
+import logging
 import re
 import uuid
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
 from pydantic import BaseModel
+
+from emailer import send_reservation_confirmation, EmailPaused
+
+logger = logging.getLogger(__name__)
 
 DOMAIN = "bozzmail.com"
 HANDLE_RE = re.compile(r"^[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$")
@@ -52,6 +57,19 @@ def validate_handle(handle: str) -> Optional[str]:
     return None
 
 
+async def deliver_confirmation(db, reservation: "Reservation") -> None:
+    """Background task: email the reserver and record the outcome on the reservation."""
+    try:
+        email_id = await send_reservation_confirmation(to=reservation.email, address=reservation.address, position=reservation.position)
+        update = {"confirmation_email": {"status": "sent", "id": email_id, "sent_at": datetime.now(timezone.utc)}}
+    except EmailPaused as exc:
+        update = {"confirmation_email": {"status": "paused", "reason": str(exc)}}
+    except Exception as exc:  # network / provider error — reservation itself stays valid
+        logger.error("Confirmation email failed for %s: %s", reservation.address, exc)
+        update = {"confirmation_email": {"status": "failed", "reason": str(exc)[:200]}}
+    await db.reservations.update_one({"id": reservation.id}, {"$set": update})
+
+
 def build_router(db) -> APIRouter:
     router = APIRouter(prefix="/reservations", tags=["reservations"])
 
@@ -67,7 +85,7 @@ def build_router(db) -> APIRouter:
         return {"handle": h, "address": f"{h}@{DOMAIN}", "available": True, "reason": None, "message": "This address is available."}
 
     @router.post("", response_model=Reservation, status_code=201)
-    async def create_reservation(body: ReservationCreate):
+    async def create_reservation(body: ReservationCreate, background: BackgroundTasks):
         h = normalize_handle(body.handle)
         error = validate_handle(h)
         if error:
@@ -96,7 +114,16 @@ def build_router(db) -> APIRouter:
             if "duplicate key" in str(exc).lower():
                 raise HTTPException(status_code=409, detail="Sorry, this address was just reserved by someone else.")
             raise
+        background.add_task(deliver_confirmation, db, entry)
         return entry
+
+    @router.get("/{reservation_id}/status")
+    async def reservation_status(reservation_id: str):
+        doc = await db.reservations.find_one({"id": reservation_id}, {"_id": 0, "address": 1, "position": 1, "confirmation_email": 1})
+        if not doc:
+            raise HTTPException(status_code=404, detail="Reservation not found.")
+        email_state = doc.get("confirmation_email") or {"status": "pending"}
+        return {"address": doc["address"], "position": doc["position"], "confirmation_email": email_state.get("status")}
 
     @router.get("/count")
     async def reservations_count():

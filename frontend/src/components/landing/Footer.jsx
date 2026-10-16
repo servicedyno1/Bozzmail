@@ -3,7 +3,7 @@ import { FaXTwitter, FaMastodon } from "react-icons/fa6";
 import { Logo } from "./Logo";
 
 const columns = [
-  { title: "Products", links: [["Bozzmail Mail", "#product"], ["Bozzmail Calendar", "#product"], ["Bozzmail Contacts", "#product"]] },
+  { title: "Products", links: [["Bozzmail Mail", "#product"], ["Bozzmail Calendar", "#product"], ["Bozzmail Contacts", "#product"], ["Pricing", "#pricing"]] },
   { title: "Company", links: [["Community", "#freedom-fighters"], ["Team", "#freedom-fighters"], ["Jobs", "#freedom-fighters"], ["Terms", "#"], ["Privacy", "#"], ["Legal notice", "#"]] },
   { title: "Development", links: [["Roadmap", "#security"], ["Security", "#security"], ["Encryption", "#security"], ["Open standards", "#security"]] },
   { title: "Needs", links: [["Personal", "#audiences"], ["Business", "#business"]] },

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 export const Section = ({ id, bg = "bg-white", className = "", children, testid }) => (
-  <section id={id} className={`${bg} section-pad ${className}`} data-testid={testid}>
+  <section id={id} className={`${bg} section-pad scroll-mt-20 ${className}`} data-testid={testid}>
     <div className="container-tuta">{children}</div>
   </section>
 );

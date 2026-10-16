@@ -6,6 +6,7 @@ const links = [
   { label: "Mail", href: "#product" },
   { label: "Calendar", href: "#product" },
   { label: "Security", href: "#security" },
+  { label: "Pricing", href: "#pricing" },
   { label: "Download", href: "#download" },
   { label: "Business", href: "#business" },
   { label: "Mission", href: "#freedom-fighters" },

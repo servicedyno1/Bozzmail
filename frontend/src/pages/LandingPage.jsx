@@ -7,6 +7,7 @@ import { DownloadSection } from "@/components/landing/DownloadSection";
 import { Mission } from "@/components/landing/Mission";
 import { FeatureGrid } from "@/components/landing/FeatureGrid";
 import { Business } from "@/components/landing/Business";
+import { Pricing } from "@/components/landing/Pricing";
 import { Audiences } from "@/components/landing/Audiences";
 import { CTABand } from "@/components/landing/CTABand";
 import { Footer } from "@/components/landing/Footer";
@@ -23,6 +24,7 @@ export default function LandingPage() {
       <DownloadSection />
       <Mission />
       <FeatureGrid />
+      <Pricing />
       <Business />
       <Audiences />
       <CTABand />
