@@ -1,0 +1,31 @@
+{
+  "summary": "Tested Bozzmail landing page end-to-end. Backend waitlist API fully functional (8/8 pytest tests pass). Frontend loads with 0 JS errors; all required data-testids present and interactive (hero toggle on/off, product tabs, values dots, nav anchor scroll, mobile menu, waitlist success + duplicate flows). All images under /illustrations and /brand return HTTP 200 and render (naturalWidth>0 after lazy-load scroll). Found 1 real UI issue: horizontal overflow on 390px mobile viewport (scrollWidth=428, 38px overflow) originating in the Product tabs section — a bold italic 'tutao' span exceeds the mobile container width.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ProductShowcase product tabs", "issue": "On mobile 390px viewport, documentElement.scrollWidth=428 (38px horizontal overflow). Culprit span has classes 'font-bold italic tracking-[-0.02em] text-tutao text-[1.6rem]' inside the tab label grid (grid grid-cols-2 gap-3 md:gap-4) — the large italic 'b/bozzmail' tab text does not shrink/wrap at small widths. Causes page-wide horizontal scroll on mobile.", "selector": "[data-testid='product-tabs'] span.text-tutao", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Mobile 390px", "issues": ["Horizontal scrollbar visible due to Product section tab labels overflowing container (see ui_bugs)."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_waitlist.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "Fix mobile horizontal overflow at #product section: reduce the italic tutao-letter font-size on <sm or allow the tab label text to wrap/truncate so grid cells stay within 390px."
+  ],
+  "critical_code_review_comments": [
+    "server.py: /api/waitlist stores created_at as ISO string in Mongo but response_model expects datetime; list endpoint converts back. Works, but mixing types is fragile — store as native BSON datetime and let pydantic serialize.",
+    "No rate limiting on POST /api/waitlist — public endpoint susceptible to spam/enumeration (duplicate 409 also leaks membership).",
+    "Hero.jsx uses `calc(900px + 120vh)` wrapper + framer scroll; scrollYProgress-based state toggle is reliable but may feel jumpy on short viewports — consider threshold tuning for <700px heights.",
+    "Images use lazy loading correctly; initial naturalWidth=0 for below-the-fold images is expected behavior (not a bug)."
+  ],
+  "updated_files": ["/app/backend/tests/test_waitlist.py"],
+  "success_rate": {"backend": "100%", "frontend": "~95%"},
+  "test_credentials": "N/A - public landing page",
+  "seed_data_creation": "Inserted 2 test waitlist entries with emails qa+<timestamp>@example.com into MongoDB waitlist collection during tests. Low volume, no cleanup required (no PII).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend tests at /app/backend/tests/test_waitlist.py cover POST (201/409/422), GET list, GET count with persistence verification. Public URL: https://privacy-mail-site.preview.emergentagent.com. Only known issue is mobile horizontal overflow at Product section (~38px, caused by italic 'tutao' span inside product-tabs grid). All data-testids from spec exist and function correctly. mail-mockups testid only renders when product-tab-mail is active (default), calendar-mockups when calendar tab active — this is correct behavior.",
+  "rca of the issue": "Mobile overflow RCA: In /app/frontend/src/components/landing/ProductShowcase.jsx the two tab buttons sit in a `grid grid-cols-2 gap-3` and each contains a large italic brand mark span with `text-[1.6rem]` and no responsive scaling / white-space handling. At 390px viewport the span's intrinsic width (~218px) + button padding + gaps pushes the row past the container, dragging the document scrollWidth to 428px. Mitigation: either (a) use responsive font size (e.g. `text-[1.2rem] md:text-[1.6rem]`), (b) allow truncation (`truncate` or `break-words`), or (c) switch tabs to a single-column stack on <sm breakpoints."
+}

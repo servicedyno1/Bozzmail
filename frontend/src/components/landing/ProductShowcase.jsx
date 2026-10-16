@@ -83,12 +83,12 @@ export const ProductShowcase = () => {
               role="tab"
               aria-selected={selected}
               onClick={() => { setTab(k); setActive(0); }}
-              className={`flex items-center justify-center rounded-t-[6px] px-3 py-5 transition-colors md:py-7 ${
+              className={`flex min-w-0 items-center justify-center overflow-hidden rounded-t-[6px] px-2 py-4 transition-colors md:px-3 md:py-7 ${
                 selected ? "bg-white" : "bg-candy-light opacity-60 hover:opacity-90"
               }`}
               data-testid={`product-tab-${k}`}
             >
-              <Logo product={products[k].label} size="md" />
+              <Logo product={products[k].label} size="md" compactOnMobile />
             </button>
           );
         })}

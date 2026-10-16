@@ -1,49 +1,52 @@
-# PRD — Enclave Landing Page (Tuta-quality design study)
+# PRD — Bozzmail Landing Page (Tuta-fidelity design)
 
 ## Original problem statement
-"can you design exact quality as this landing page https://tuta.com/?"
+"can you design exact quality as this landing page https://tuta.com/?" — later: "bozzmail.com will be used and branding needs to be created and logo", and "the quality is still poor when compared to tuta.com — clear from the logo and all other graphics quality and styles".
 
-## Discovery answers (verbatim)
-- Page for: own business with same design quality as tuta.com; faithful design study/replica of tuta.com
-- Audience: privacy-conscious individuals
-- Showcase: skipped → defaults (encrypted email, calendar, pricing plans)
-- Differentiator: "ok" → no concrete claim given (no fabricated stats/reviews used)
-- Main CTA: email capture / waitlist form
+## User decisions (verbatim)
+- Audience: privacy-conscious individuals; CTA: email capture / waitlist (stored in MongoDB)
+- Palette: **Use Tuta's exact red/burgundy/peach palette**
+- Logo: option **c — Lettermark "b" with envelope bowl**
+- "where does waitlist go? we should have a mongodb" → confirmed: MongoDB `waitlist` collection
 
 ## Architecture
-- FastAPI backend (/app/backend/server.py): POST /api/waitlist (201/409/422), GET /api/waitlist, GET /api/waitlist/count; MongoDB `waitlist` collection via MONGO_URL/DB_NAME
-- React frontend: single landing page at /, shadcn Tabs + sonner toasts, framer-motion reveals
-- Design: light Tuta-faithful theme — paper #FDFDFA, ink #1B1526, crimson #850122, pine green #015F47; Cabinet Grotesk (display) + Satoshi (body) via Fontshare
-- Product mockups (Mail inbox, Calendar week) hand-built in JSX/CSS for Tuta-level fidelity
+- Backend: FastAPI `/app/backend/server.py` — POST /api/waitlist (201/409/422), GET /api/waitlist, GET /api/waitlist/count; MongoDB via MONGO_URL/DB_NAME, collection `waitlist` {email, created_at}
+- Backend tests: `/app/backend/tests/test_waitlist.py` (8 pytest tests, passing)
+- Frontend: React CRA + Tailwind + framer-motion + shadcn (sonner toasts) + react-icons; single page `/`
+- Mobile smoke script: `/app/frontend/tests/mobile_check.py` (run with /opt/plugins-venv/bin/python)
 
-## Branding (2026-10-16)
-- Real brand: Bozzmail (bozzmail.com)
-- Custom SVG logo mark: crimson squircle #850122, white geometric "b" (stem + bowl ring), mint "secured message" dot #35D99A
-- Mixed-weight wordmark: "Bozz" extrabold + "mail" light (Cabinet Grotesk)
-- favicon.svg + theme-color #850122 + SEO title/description in index.html
-- Full sweep: header, footer, hero, tabs, values, dark band, downloads, mission, toasts, backend root message
+## Design system (Tuta tokens, in /app/frontend/src/index.css + tailwind.config.js)
+- Colors: red-nota #D93951, red-tutao #850122, red-dunkel #410002, red-fighter #FF0A0A, candy #FFCCCC, candy-light #FFEDEA, peach #FFF2EA, dark-peach #E4C8B7, yellow-action #FEF9C3, sonne #FEE06A, green-tutao #015F47, green-nota #009074, green-candy #C3ECE0, lavender #EEEDF9, navy, teal
+- Type: Noto Sans (body/headings), IBM Plex Mono 600 (hero display, stand-in for Tuta's MDIO)
+- Radius 6px, shadows `0 4px 8px #0003` / `#41000240`, content width 1254px, header pill 1286px
+- Section titles: one bold word pattern (`<strong>Secure</strong> at a touch`)
 
-## Implemented (2026-10-16)
-- Sticky header with scroll state + mobile menu
-- Hero "Turn ON Privacy." with interactive animated privacy toggle + working waitlist form
-- Tabbed product showcase (Enclave Mail / Enclave Calendar) with CSS-crafted app mockups
-- "A better web." values section (Secure / Green / Ad-free) with honest placeholder testimonial slots
-- "Turn OFF Surveillance." dark band with CTA
-- Download section (platform pills, "Soon" badges — no fake links)
-- "Freedom fighters." mission cards
-- "Post-quantum security." 6-item feature grid
-- Audience cards (Business / Medical / Personal / Journalists) with real curated images
-- "Forever free." crimson CTA band with second working waitlist form
-- Comprehensive dark footer
-- Page title/meta updated
+## Brand assets
+- `/public/brand/mark-lettermark.png` (chosen), `mark-isometric.png`, `mark-shield.png`, `logo-concepts.png` (alternates kept)
+- Wordmark: bold italic "bozzmail" in burgundy; product variants "bozzmail mail / calendar"
+- favicon.png + apple-touch-icon.png
+- Illustrations `/public/illustrations/`: switch-on.webp, switch-off-finger.webp (alpha-keyed), usp_secure/green/adfree.webp, story_servers/founders/team.webp, aud_business/medical/personal/activists/journalists.webp, free_phone.webp (alpha), biz_photo.webp
 
-## Tested
-- Backend: 201 create, 409 duplicate, 422 invalid, count endpoint (curl)
-- Frontend: hero form submit (toast + "You're in" state), CTA form submit, toggle, tab switch both directions, all audience images load, mobile 390px layout
-- Console: clean (AnimatePresence warnings fixed)
+## Page sections (2026-10-16 rebuild — DONE, tested)
+1. Green announcement bar + floating white header pill (6 links, "Why Bozzmail" outline, "Join waitlist" filled, mobile hamburger)
+2. Scroll-driven sticky hero: red → dark burgundy, "Turn ON Privacy" → scramble → "Turn OFF Surveillance", light switch + finger illustration, waitlist form (yellow → bright-red button)
+3. "Secure at a touch" — product tabs (mail/calendar) with product logos, timeline USP list (active red + dashed ring), CSS desktop + phone mockups, floating "quantum-safe" card
+4. "A better web" — Secure/Green/Ad-free peach cards with illustrations + speech-bubble "Bozzmail promise" statements (dots)
+5. "Turn OFF Surveillance" red band + waitlist form
+6. "Download Bozzmail" — 6 platform icons with Soon badges
+7. "Freedom fighters" — two photo stories with overlapping peach boxes + round/shield badges; team mosaic + CTA
+8. "Welcome to post-quantum security" — 6-card bento (nota/tutao/candy/sonne) with ribbon badge
+9. "Privacy for your organization" — lavender section, photo + copy + burgundy CTA
+10. "For all your email needs" — 5 audience cards with illustrations
+11. "Forever free" red band + waitlist form + phone illustration
+12. Footer — logo, socials, 6 columns, language select, badges
+
+## Testing (iteration_1, 2026-10-16)
+- Backend 100% (8/8), frontend ~95% → one mobile overflow bug fixed (responsive logo in tabs); scrollWidth = 390 verified
 
 ## Backlog
-- P0: Real brand name, logo, real differentiator copy from owner (currently brand "Bozzmail" (bozzmail.com) — DONE 2026-10-16)
 - P1: Pricing section (Tuta-like plan table)
-- P1: SEO setup (OG tags, sitemap — farm-seo-setup skill)
-- P2: i18n, blog/press section, admin view of waitlist signups
+- P1: SEO (OG tags, sitemap — farm-seo-setup skill)
+- P1: Admin view / CSV export of waitlist
+- P2: Rate limiting on POST /api/waitlist; store created_at as BSON datetime
+- P2: i18n, blog/press, real testimonials once available
