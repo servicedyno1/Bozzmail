@@ -3,12 +3,75 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#850122" />
-        <meta name="description" content="Bozzmail: Turn ON privacy. Encrypted email, calendar and contacts — free forever, without ads or tracking." />
+        <meta name="theme-color" content="#d93951" />
+        <title>Bozzmail — Encrypted email, calendar & contacts</title>
+        <meta name="description" content="Bozzmail is encrypted, ad-free email with a private calendar and contacts. No tracking, free forever. Reserve your @bozzmail.com address before launch." />
+        <link rel="canonical" href="https://bozzmail.com/" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Bozzmail" />
+        <meta property="og:title" content="Bozzmail — Encrypted email, calendar & contacts" />
+        <meta property="og:description" content="Encrypted, ad-free email with a private calendar and contacts. No tracking, free forever. Reserve your @bozzmail.com address before launch." />
+        <meta property="og:url" content="https://bozzmail.com/" />
+        <meta property="og:image" content="https://bozzmail.com/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Bozzmail — Turn ON Privacy. Encrypted email, calendar and contacts, with an illustrated light switch." />
+        <meta property="og:locale" content="en_US" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Bozzmail — Encrypted email, calendar & contacts" />
+        <meta name="twitter:description" content="Encrypted, ad-free email with a private calendar and contacts. No tracking, free forever. Reserve your @bozzmail.com address before launch." />
+        <meta name="twitter:image" content="https://bozzmail.com/og-image.png" />
+
         <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://bozzmail.com/#org",
+              "name": "Bozzmail",
+              "url": "https://bozzmail.com/",
+              "logo": "https://bozzmail.com/apple-touch-icon.png",
+              "description": "Bozzmail is encrypted, ad-free email with a private calendar and contacts. No tracking, free forever."
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://bozzmail.com/#website",
+              "url": "https://bozzmail.com/",
+              "name": "Bozzmail",
+              "publisher": { "@id": "https://bozzmail.com/#org" },
+              "inLanguage": "en"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "name": "Bozzmail Mail",
+              "applicationCategory": "CommunicationApplication",
+              "operatingSystem": "Android, iOS, Windows, macOS, Linux, Web",
+              "url": "https://bozzmail.com/",
+              "description": "End-to-end encrypted email, calendar and contacts without ads or tracking.",
+              "publisher": { "@id": "https://bozzmail.com/#org" }
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Is reserving an address free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Reserving your @bozzmail.com address costs nothing and needs no payment details. It simply holds the handle for you until launch." } },
+                { "@type": "Question", "name": "Is the reservation binding?", "acceptedAnswer": { "@type": "Answer", "text": "No. You are not committing to anything. When Bozzmail launches you will receive an invite to activate the address; if you decide not to, the reservation simply lapses." } },
+                { "@type": "Question", "name": "When does Bozzmail launch?", "acceptedAnswer": { "@type": "Answer", "text": "We will email your launch invite to the contact address you gave us as soon as your encrypted mailbox is ready. Early reservations are invited first." } },
+                { "@type": "Question", "name": "Can I change my handle later?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can pick a different available handle before activation. The address becomes permanent only once you activate it at launch." } },
+                { "@type": "Question", "name": "What do you do with my contact email?", "acceptedAnswer": { "@type": "Answer", "text": "We use it only to confirm your reservation and send your launch invite. No newsletters, no third parties, no tracking pixels." } },
+                { "@type": "Question", "name": "How is my data protected?", "acceptedAnswer": { "@type": "Answer", "text": "Bozzmail is built on end-to-end, zero-knowledge encryption: mail, calendar and contacts are encrypted on your device so only you can read them, and we never show ads or profile you." } }
+              ]
+            }
+          ]
+        }
+        </script>
         <!--
         manifest.json provides metadata used when your web app is installed on a
         user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -22,12 +85,14 @@
         work correctly both with client-side routing and a non-root public URL.
         Learn how to configure a non-root public URL by running `npm run build`.
         -->
-        <title>Bozzmail: Turn ON privacy — secure email, calendar & contacts</title>
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
     </head>
     <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <noscript>
+            <h1>Turn ON Privacy — Bozzmail encrypted email, calendar and contacts</h1>
+            <p>Encrypted email, calendar and contacts, yours forever. Reserve your @bozzmail.com address before launch. Bozzmail automatically encrypts all your data end-to-end with post-quantum cryptography, runs on renewable energy and never shows ads or tracks you.</p>
+        </noscript>
         <div id="root"></div>
         <!--
       This HTML file is a template.

@@ -1,0 +1,16 @@
+# Bozzmail
+
+> Encrypted, ad-free email with a private calendar and contacts. No tracking. Bozzmail is pre-launch: visitors can reserve their @bozzmail.com address and receive a launch invite.
+
+## What Bozzmail is
+- End-to-end, zero-knowledge encrypted email, calendar and contacts
+- No ads, no tracking, no profiling
+- Apps planned for Android, iOS, Windows, macOS, Linux and the browser
+- Hosting powered by renewable energy
+
+## Who it is for
+- Privacy-conscious individuals
+- Businesses, medical practices, activists and journalists who need confidential communication
+
+## Key pages
+- https://bozzmail.com/ — landing page: product overview, security approach, planned plan tiers, FAQ and the @bozzmail.com address reservation form

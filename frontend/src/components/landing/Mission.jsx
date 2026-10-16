@@ -36,7 +36,7 @@ const Story = ({ image, alt, title, children, badge, testid }) => (
       {badge}
       <div className="rounded-[6px] bg-peach p-6 md:p-8">
         <h3 className="text-[length:var(--text-ml)] font-bold text-tutao">{title}</h3>
-        <p className="mt-3 text-base text-tutao">{children}</p>
+        <p className="mt-3 max-w-[65ch] text-base text-tutao">{children}</p>
       </div>
     </div>
   </Reveal>
@@ -74,7 +74,7 @@ export const Mission = () => (
       <div className="relative z-10 mx-4 -mt-16 rounded-[6px] bg-peach p-6 md:p-8 lg:-ml-24 lg:mt-0">
         <RoundBadge text="WE LOVE PRIVACY •" bg="bg-candy" fg="#850122" Icon={Heart} className="-top-14 right-4 hidden md:flex" />
         <h3 className="text-[length:var(--text-ml)] font-bold text-tutao">Join the Bozzmail team</h3>
-        <p className="mt-3 text-base text-tutao">
+        <p className="mt-3 max-w-[65ch] text-base text-tutao">
           Hi, we are the Bozzmail team. We build the most secure email, calendar and contacts service so you can take control of your data. Our mission is to bring privacy to everyone, with freedom and zero tracking. Be part of it.
         </p>
         <div className="mt-6 flex justify-end">

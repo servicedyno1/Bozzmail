@@ -17,7 +17,7 @@ export const Business = () => (
 
     <Reveal className="grid items-start gap-8 lg:grid-cols-[1fr_1fr] lg:gap-6">
       <img src="/illustrations/biz_photo.webp" alt="A professional in a red blazer working on a laptop in a bright office." loading="lazy" className="w-full rounded-[6px] object-cover" />
-      <div className="text-base text-navy">
+      <div className="max-w-[65ch] text-base text-navy">
         <p>Bozzmail is built for businesses — from small studios to financial institutions and human-rights organizations — that need to protect their professional emails and calendars.</p>
         <p className="mt-5">Save time and money by storing all your business emails end-to-end encrypted and protected by strong data-protection laws. Benefit from cost-efficiency, high availability, flexibility and automatic backup — without compromising on security or digital sovereignty.</p>
         <p className="mt-5 font-bold">Be among the first organizations to choose Bozzmail to safeguard their data.</p>

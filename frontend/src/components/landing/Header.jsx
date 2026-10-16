@@ -10,6 +10,7 @@ const links = [
   { label: "Download", href: "#download" },
   { label: "Business", href: "#business" },
   { label: "Mission", href: "#freedom-fighters" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const AnnouncementBar = () => (
@@ -59,14 +60,14 @@ export const Header = () => {
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href="#better-web"
-            className="rounded-[6px] border border-nota px-3 py-1.5 font-semibold text-nota transition-colors hover:bg-candy-light"
+            className="rounded-[6px] px-3 py-1.5 font-semibold text-nota underline-offset-4 transition-colors hover:underline"
             data-testid="nav-secondary-button"
           >
             Why Bozzmail
           </a>
           <a
             href="#reserve"
-            className="rounded-[6px] border border-nota bg-nota px-3 py-1.5 font-semibold text-white transition-[filter] hover:brightness-110"
+            className="rounded-[6px] border border-nota bg-nota px-4 py-2 font-semibold text-white shadow-tuta transition-[filter] hover:brightness-110"
             data-testid="nav-cta-button"
           >
             Reserve address

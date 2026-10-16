@@ -1,5 +1,7 @@
 import { Header, AnnouncementBar } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
+import { ProblemBeat } from "@/components/landing/ProblemBeat";
+import { FAQ } from "@/components/landing/FAQ";
 import { ProductShowcase } from "@/components/landing/ProductShowcase";
 import { Values } from "@/components/landing/Values";
 import { SignupBand } from "@/components/landing/SignupBand";
@@ -18,15 +20,17 @@ export default function LandingPage() {
       <AnnouncementBar />
       <Header />
       <Hero />
+      <ProblemBeat />
       <ProductShowcase />
       <Values />
       <SignupBand />
-      <DownloadSection />
       <Mission />
       <FeatureGrid />
       <Pricing />
+      <DownloadSection />
       <Business />
       <Audiences />
+      <FAQ />
       <CTABand />
       <Footer />
     </main>

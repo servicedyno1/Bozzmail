@@ -82,7 +82,11 @@ export const ReserveForm = ({ idPrefix = "reserve", variant = "yellow", buttonLa
 
   const submit = async (e) => {
     e.preventDefault();
-    if (loading || avail.status !== "available") return;
+    if (loading) return;
+    if (!handle.trim()) { toast.error("Pick the address you'd like first."); return; }
+    if (avail.status === "checking") { toast.info("Still checking availability — one moment."); return; }
+    if (avail.status !== "available") { toast.error(avail.message || "Please choose an available address."); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) { toast.error("Please enter a valid contact email so we can send your invite."); return; }
     setLoading(true);
     try {
       const { data } = await axios.post(`${API}/reservations`, { handle: handle.trim().toLowerCase(), email: email.trim() });
@@ -127,8 +131,9 @@ export const ReserveForm = ({ idPrefix = "reserve", variant = "yellow", buttonLa
         />
         <button
           type="submit"
-          disabled={loading || avail.status !== "available" || !email.trim()}
-          className={`btn-tuta h-12 shrink-0 disabled:cursor-not-allowed disabled:opacity-60 ${v.button}`}
+          disabled={loading}
+          aria-disabled={avail.status !== "available" || !email.trim()}
+          className={`btn-tuta h-12 shrink-0 shadow-tuta disabled:opacity-70 ${v.button}`}
           data-testid={`${idPrefix}-submit-button`}
         >
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}

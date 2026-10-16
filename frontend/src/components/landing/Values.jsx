@@ -10,9 +10,9 @@ const usps = [
     image: "/illustrations/usp_secure.webp",
     alt: "Illustration of a woman working on a laptop next to a large shield with a padlock.",
     quotes: [
-      "Encryption is the only privacy guarantee that doesn't depend on trust.",
-      "Your keys are generated on your device. They never leave it unencrypted.",
-      "Post-quantum algorithms protect today's mail from tomorrow's computers.",
+      "Mail, calendar and contacts are encrypted on your device before anything is sent.",
+      "Your private keys are generated locally and never leave your device unencrypted.",
+      "Hybrid post-quantum algorithms protect today's mail against tomorrow's computers.",
     ],
   },
   {
@@ -22,9 +22,9 @@ const usps = [
     image: "/illustrations/usp_green.webp",
     alt: "Illustration of a wind turbine, solar panels and an enlarged light bulb symbolizing renewable energy.",
     quotes: [
-      "Privacy should never cost the planet. Our servers run on 100% renewable power.",
-      "Efficient code is green code: less data moved, less energy burned.",
-      "A free plan with no ads means no server farms crunching your behaviour.",
+      "Our infrastructure is powered by renewable energy.",
+      "No ad-tech means no data warehouses crunching your behaviour around the clock.",
+      "Lean, efficient apps move less data — and burn less energy on every device.",
     ],
   },
   {
@@ -34,9 +34,9 @@ const usps = [
     image: "/illustrations/usp_adfree.webp",
     alt: "Illustration of a man with a clipboard next to an enlarged shield with a stop hand symbol.",
     quotes: [
-      "If the product is free and full of ads, you are the product. Bozzmail is funded by its users.",
-      "No tracking pixels. No profiling. No 'personalized' anything.",
-      "An inbox should be a quiet room, not a billboard.",
+      "Bozzmail is funded by paid plans, not by advertisers — so you are the customer, never the product.",
+      "No tracking pixels, no profiling, no 'personalised' anything — in the app or in our emails to you.",
+      "Remote images and trackers in incoming mail are blocked by default.",
     ],
   },
 ];
@@ -51,7 +51,7 @@ const Bubble = ({ quotes, prefix }) => {
           <path d="M1 0 L12 62 L23 0" fill="#fff" stroke="#850122" strokeWidth="1" />
         </svg>
       </div>
-      <p className="mt-[72px] text-sm uppercase tracking-wide text-dunkel">The Bozzmail promise</p>
+      <p className="mt-[72px] text-sm uppercase tracking-wide text-dunkel">How it works</p>
       <div className="mt-3 flex gap-2.5" role="tablist">
         {quotes.map((_, idx) => (
           <button
