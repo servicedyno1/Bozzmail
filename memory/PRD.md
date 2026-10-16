@@ -62,8 +62,12 @@
 - `reservations.py`: BackgroundTasks → deliver_confirmation records `confirmation_email {status: sent|paused|failed, id, sent_at}` on the reservation; GET /api/reservations/{id}/status
 - NOTE: APP_PUBLIC_URL currently points to the preview URL — set to https://bozzmail.com at production deploy. Sender address is the platform's managed sender with display name "Bozzmail".
 
+## SEO + conversion audit fixes (2026-10-16) — DONE, tested (iteration_4: frontend 100%)
+- SEO (farm-seo-setup skill): title/description/canonical (https://bozzmail.com — user-confirmed production domain), OG + Twitter cards, og-image.png 1200×630 (PIL-generated from brand assets), JSON-LD @graph (Organization, WebSite, SoftwareApplication, FAQPage mirroring on-page FAQ), noscript h1+paragraph, robots.txt (explicit AI-crawler group, Disallow /api/), sitemap.xml, llms.txt. Verified served with correct content-types. Deploy handoff: redeploy + enable "Search Engine Crawling" toggle; re-verify on live domain; submit sitemap in Google Search Console.
+- Conversion fixes: ProblemBeat section after hero; FAQ accordion (6 Qs) before Forever free; hero subheadline split + proof line (live counter via /api/reservations/count, shown as count when ≥50 else "Be among the first"); hero CTA always enabled-looking with click-time validation toasts; Download moved below Pricing; plan CTAs "Reserve my address"; "Why Bozzmail" demoted to text link; nav FAQ link; value bubbles → "How it works" facts; 65ch measure caps; switch frames cropped to remove headroom
+- Omitted from structured data (unconfirmed): social sameAs URLs, hello@bozzmail.com email, address/phone, prices
+
 ## Backlog
-- P1: SEO (OG tags, sitemap — farm-seo-setup skill)
 - P1: Admin view / CSV export of waitlist
 - P2: Rate limiting on POST /api/waitlist; store created_at as BSON datetime
 - P2: i18n, blog/press, real testimonials once available
