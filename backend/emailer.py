@@ -1,4 +1,4 @@
-"""Transactional email via Emergent's managed Resend integration (see Resend playbook guardrails)."""
+"""Transactional email via Brevo (owner's Brevo account; API key is IP-restricted to the prod droplet)."""
 import os
 import re
 import ipaddress
@@ -13,10 +13,10 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent / ".env")
 logger = logging.getLogger(__name__)
 
-# Emergent managed email proxy — a constant on purpose (survives deployment).
-EMAIL_BASE_URL = "https://integrations.emergentagent.com"
-EMAIL_KEY = os.environ["EMERGENT_EMAIL_KEY"]
+BREVO_SEND_URL = "https://api.brevo.com/v3/smtp/email"
+BREVO_API_KEY = os.environ["BREVO_API_KEY"]
 EMAIL_FROM_NAME = os.environ["EMAIL_FROM_NAME"]  # this app's own brand (G1)
+EMAIL_FROM_ADDRESS = os.environ["EMAIL_FROM_ADDRESS"]  # sender on the Brevo-authenticated bozzmail.com domain
 EMAIL_REPLY_TO = os.environ.get("EMAIL_REPLY_TO")
 APP_PUBLIC_URL = os.environ["APP_PUBLIC_URL"].rstrip("/")
 
@@ -97,28 +97,34 @@ def _assert_safe_email(subject: str, html: str) -> None:
 
 
 class EmailPaused(Exception):
-    """Billing / integration state on the app owner's account — not transient."""
+    """Account state on the owner's Brevo account (credits / key / IP authorization) — not transient."""
 
 
 async def send_email(*, to: str, subject: str, html: str) -> str:
     _assert_safe_email(subject, html)
-    payload = {"to": [to], "subject": subject, "html": html, "from_name": EMAIL_FROM_NAME}
+    payload = {
+        "sender": {"name": EMAIL_FROM_NAME, "email": EMAIL_FROM_ADDRESS},
+        "to": [{"email": to}],
+        "subject": subject,
+        "htmlContent": html,
+        "tags": ["bozzmail-reservation"],
+    }
     if EMAIL_REPLY_TO:
-        payload["contact_email"] = EMAIL_REPLY_TO
-    async with httpx.AsyncClient(timeout=30) as client:
-        resp = await client.post(f"{EMAIL_BASE_URL}/api/v1/email/send", headers={"X-Email-Key": EMAIL_KEY}, json=payload)
+        payload["replyTo"] = {"email": EMAIL_REPLY_TO}
+    async with httpx.AsyncClient(timeout=httpx.Timeout(15.0, connect=5.0)) as client:
+        resp = await client.post(BREVO_SEND_URL, headers={"api-key": BREVO_API_KEY, "accept": "application/json"}, json=payload)
     if resp.status_code >= 400:
         try:
             data = resp.json()
         except ValueError:
             data = {}
         code = data.get("code", "")
-        if code in ("insufficient_credits", "integration_disabled", "daily_limit_reached"):
+        if resp.status_code in (401, 402, 403):
             logger.warning("Email paused: %s (%s): %s", code, resp.status_code, data.get("message", ""))
-            raise EmailPaused(code)
-        logger.error("Email send failed: %s %s", resp.status_code, resp.text)
+            raise EmailPaused(code or f"http_{resp.status_code}")
+        logger.error("Email send failed: %s %s", resp.status_code, resp.text[:500])
         resp.raise_for_status()
-    return resp.json().get("id", "")
+    return resp.json().get("messageId", "")
 
 
 # ---------------------------------------------------------------------------

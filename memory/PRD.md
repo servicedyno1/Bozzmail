@@ -58,7 +58,7 @@
 
 ## Pricing + confirmation email (2026-10-16) — DONE, tested (iteration_3: backend 16/16, frontend 100%)
 - `Pricing.jsx` "Planned pricing": Free €0 / Revolutionary €3 (yearly, €3,60 monthly, Most popular) / Legend €8 (yearly, €9,60 monthly); monthly/yearly toggle; CTAs → #reserve; nav + footer "Pricing" links; placed after security grid
-- `emailer.py`: Emergent-managed Resend proxy (EMERGENT_EMAIL_KEY, EMAIL_FROM_NAME=Bozzmail, APP_PUBLIC_URL in backend/.env; EMAIL_BASE_URL constant), playbook guardrail gate on every send, branded table-based template (address, position, invite link to APP_PUBLIC_URL)
+- `emailer.py`: Brevo transactional API (`POST https://api.brevo.com/v3/smtp/email`), owner's Brevo account. Prod env in /opt/bozzmail/shared/backend.env: BREVO_API_KEY (IP-restricted to droplet 146.190.238.190), EMAIL_FROM_NAME=Bozzmail, EMAIL_FROM_ADDRESS=hello@bozzmail.com (bozzmail.com authenticated in Brevo: brevo-code TXT, brevo1/brevo2 DKIM CNAMEs, _dmarc on Cloudflare), APP_PUBLIC_URL. Guardrail gate still runs on every send. Switched from the Emergent email proxy on 2026-10-21.
 - `reservations.py`: BackgroundTasks → deliver_confirmation records `confirmation_email {status: sent|paused|failed, id, sent_at}` on the reservation; GET /api/reservations/{id}/status
 - NOTE: APP_PUBLIC_URL currently points to the preview URL — set to https://bozzmail.com at production deploy. Sender address is the platform's managed sender with display name "Bozzmail".
 
